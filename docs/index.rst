@@ -15,9 +15,7 @@ Documentation
    :caption: Contents:
 
    sec_introduction
-   sec_public_access
    sec_user_guide
-   sec_howto
    sec_faq
 
 
