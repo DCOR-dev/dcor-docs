@@ -5,7 +5,6 @@ Repository (DCOR) <https://dcor.mpl.mpg.de>`_, a public repository for
 real-time deformability cytometry (RT-DC) datasets hosted by the
 `Max-Planck-Gesellschaft <https://www.mpg.de>`_.
 
-This is version |release| of the documentation.
 
 Documentation
 =============
