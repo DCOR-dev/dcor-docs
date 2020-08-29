@@ -16,6 +16,7 @@ Documentation
    sec_introduction
    sec_user_guide
    sec_faq
+   sec_develop
 
 
 Indices and tables
