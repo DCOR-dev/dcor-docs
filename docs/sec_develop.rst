@@ -6,61 +6,23 @@ This section describes how to setup a DCOR development system
 (CKAN + DCOR extensions).
 
 
-Setup Ubuntu and CKAN
-=====================
+Ubuntu and CKAN
+===============
+We recommend to setup a virtual machine for development. It also works with
+docker, but currently not out of the box
+(see https://github.com/ckan/ckan/issues/5572).
+Otherwise, the installation instructions are identical to those in the
+:ref:`self-hosting section <selfhost_ubuntuckan>`.  
 
-Please use an `Ubuntu 20.04 <https://ubuntu.com/download/server>`_
-installation for any development or production usage. This makes it
-easier to give support and track down issues.
-
-Beore proceeding with the installation of CKAN, install the following
-packages:
-
-.. code::
-
-   apt update
-   # CKAN requirements
-   apt install -y libpq5 redis-server nginx supervisor
-   # needed for building packages that DCOR depends on (dclab)
-   apt install -y gcc python3-dev
-   # additional tools that you might find useful, but are not actually required
-   apt install aptitude net-tools
-
-
-Install CKAN:
-
-.. code::
-
-   wget https://packaging.ckan.org/python-ckan_2.9-py3-focal_amd64.deb
-   dpkg -i python-ckan_2.9-py3-focal_amd64.deb
-
-
-.. note::
-
-   Do *NOT* setup setup file uploads when following the instructions
-   at https://docs.ckan.org. DCOR has its own dedicated directories
-   for data uploads. The command ``dcor inspect`` will try to
-   setup/fix that for you.
-
-Follow the remainder of the installation guide at 
-https://docs.ckan.org/en/2.9/maintaining/installing/install-from-package.html#install-and-configure-postgresql.
-Make sure to note down the PostgreSQL password which you will need in the
-initialization step.
-
-
-
-DCOR by default stores all data on ``/data``. This makes it easier to
-control backups and separate the CKAN/DCOR software from the actual data.
-If you have not mounted a block device or a network share on ``/data``,
-please create this directory with
-
-.. code::
-
-   mkdir /data
  
 
-Install the DCOR Extensions
-===========================
+DCOR Extensions
+===============
+
+Installation
+------------
+This part differs from the installation for production. We want to have the
+DCOR extensions installed in editable mode. 
 
 .. note::
 
@@ -135,19 +97,32 @@ Next, install each of those repositories in the CKAN virtual environment.
     pip install -e dcor_control
 
 
-Initialize DCOR
-===============
-The ``dcor_control`` package installed the entry point ``dcor`` which
-allows you to manage your DCOR installation. Just type ``dcor --help``
-to find out what you can do with it.
+Initialization
+--------------
+Please follow the :ref:`initialization steps for self-hosting
+<selfhost_dcorext_init>`.
 
-For the initial setup, you have to run the ``inspect`` command. You
-can run this command on a routinely basis to make sure that your DCOR
-installation is setup correctly.
+
+
+Load some test data into the database
+=====================================
+You can test the basic functionalities of your DCOR installation by
+importing these publicly available datasets from figshare:
 
 .. code::
 
-   dcor inspect
+   ckan import-figshare
+
+
+robots.txt
+==========
+If you don't want bots to index you site, add the following line
+to the server section in ``/etc/nginx/sites-enabled/ckan``
+(right before ``location / { [...]``):
+
+.. code::
+
+   location = /robots.txt { return 200 "User-agent: *\nDisallow: /\n"; }
 
 
 Important commands
@@ -170,9 +145,11 @@ Find out what went wrong in case of internal server errors:
    supervisorctl status
    tail -n500 /var/log/ckan/ckan-uwsgi.stderr.log
 
-CKAN CLI
---------
-Activate environment and set ``CKAN_INI``.
+
+CLI
+---
+If you are using the CKAN or DCOR CLI, activate environment and set
+``CKAN_INI``.
 
 .. code::
 
@@ -180,11 +157,15 @@ Activate environment and set ``CKAN_INI``.
    export CKAN_INI=/etc/ckan/default/ckan.ini
 
 
-Delete all data from the CKAN database:
+User ``ckan --help`` and ``dcor --help`` to get a list of commands.
+E.g. to list all jobs, use
 
 .. code::
 
-   ckan asset clean
-   ckan db clean --yes
-   ckan db init
-   ckan search-index clear
+   ckan jobs list
+
+To reset the CKAN database and search index:
+
+.. code::
+
+   dcor reset
