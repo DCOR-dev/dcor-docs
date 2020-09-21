@@ -121,8 +121,8 @@ installation is setup correctly.
 
 
 
-Setting up SSL
-==============
+SSL
+===
 Encrypting data transfer should be a priority for you. If your server
 is available online, you can use e.g. `Let's Encrypt <https://letsencrypt.org/>`_
 to obtain an SSL certificate.
@@ -206,9 +206,43 @@ the following (change ``dcor.mpl.mpg.de`` to whatever domain you use).
    }
 
 
+Unattended upgrades
+===================
+`Unattended upgrades <https://wiki.debian.org/UnattendedUpgrades>`_ offer a
+simple way of keeping the server up-to-date and patched against security
+vulnerabilities.
+
+.. code::
+
+   apt-get install unattended-upgrades apt-listchanges
+
+Edit the file `/etc/apt/apt.conf.d/50unattended-upgrades` to your liking.
+The default settings should already work, but you might want to setup
+email notifications and automated reboots.
+
+.. note::
+
+   If you have access to an internal email server and wish to get
+   email notifications from your system, install
+
+   .. code::
+   
+      apt install bsd-mailx ssmtp
+
+   and edit ``/etc/ssmtp/ssmtp.conf``:
+   
+   .. code:
+   
+      mailhub=post.your.internal.server.de
+      hostname=dcor.your.domain.de
+      FromLineOverride=YES
+
+   Note that this is something different than CKAN email notifications.
+
+
 Known Issues
 ============
 
-- When setting up error email notifications, emails are sent for every file
+- When setting up CKAN error email notifications, emails are sent for every file
   accessed on the server. Set the logging level to "WARNING" in all sections
   in ``/etc/ckan/default/ckan.ini``.

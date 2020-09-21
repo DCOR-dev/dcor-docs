@@ -14,7 +14,7 @@ docker, but currently not out of the box
 Otherwise, the installation instructions are identical to those in the
 :ref:`self-hosting section <selfhost_ubuntuckan>`.  
 
- 
+
 
 DCOR Extensions
 ===============
