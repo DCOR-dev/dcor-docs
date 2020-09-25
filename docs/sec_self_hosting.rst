@@ -1,3 +1,5 @@
+.. _selfhost:
+
 ============
 Self-Hosting
 ============
@@ -25,7 +27,7 @@ packages:
    # needed for building packages that DCOR depends on (dclab)
    apt install -y gcc python3-dev
    # additional tools that you might find useful, but are not actually required
-   apt install -y aptitude net-tools mlocate screen
+   apt install -y aptitude net-tools mlocate screen needrestart
 
 
 Install CKAN:
@@ -164,6 +166,12 @@ the following (change ``dcor.mpl.mpg.de`` to whatever domain you use).
 
        ssl_certificate "/etc/ssl/certs/dcor.mpl.mpg.de.cert";
        ssl_certificate_key "/etc/ssl/private/dcor.mpl.mpg.de.key";
+
+       # To avoid robots (only on development machines)
+       #location = /robots.txt { return 200 "User-agent: *\nDisallow: /\n"; }
+
+       # CKAN deals with favicon using html tags; avoids error emails
+       location = /favicon.ico { return 404; }
 
        location / {
            proxy_pass http://127.0.0.1:8080/;

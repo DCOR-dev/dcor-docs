@@ -3,8 +3,15 @@ Frequently Asked Questions
 ==========================
 
 
-How DCOR handles data
-=====================
+Can I upload a test dataset somewhere?
+======================================
+For all testing (or development) purposes, you can use the development
+instance at https://dcor-dev.mpl.mpg.de. All datasets on that server are
+purged on a regular basis, so feel free to play with it as you see fit.
+
+
+What happens in the background when I upload a dataset?
+=======================================================
 For every DC file that you upload, DCOR performs the following tasks in
 the background:
 
@@ -23,3 +30,4 @@ the background:
 Please note that, due to this data processing, it may take a few minutes
 until the preview is visible and the ancillary features are available via
 the DCOR API. 
+
