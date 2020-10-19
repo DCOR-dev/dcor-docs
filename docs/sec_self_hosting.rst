@@ -167,11 +167,18 @@ the following (change ``dcor.mpl.mpg.de`` to whatever domain you use).
        ssl_certificate "/etc/ssl/certs/dcor.mpl.mpg.de.cert";
        ssl_certificate_key "/etc/ssl/private/dcor.mpl.mpg.de.key";
 
-       # To avoid robots (only on development machines)
+       # Uncoment to avoid robots (only on development machines)
        #location = /robots.txt { return 200 "User-agent: *\nDisallow: /\n"; }
 
-       # CKAN deals with favicon using html tags; avoids error emails
-       location = /favicon.ico { return 404; }
+       # Uncomment to mask other bot's activities
+       #location ^~ /backup { return 404; }
+       #location ^~ /wp { return 404; }
+       #location ^~ /wordpress { return 404; }
+       #location ^~ /old { return 404; }
+       #location ^~ /node/ { return 404; }
+       #location ^~ /server { return 404; }
+       #location ^~ /sitemap { return 404; }
+       #location = /.well-known/security.txt { return 404; }
 
        location / {
            proxy_pass http://127.0.0.1:8080/;
