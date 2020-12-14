@@ -34,9 +34,10 @@ DCOR extensions installed in editable mode.
     will be cloned to (e.g. ``/home/paul/repos/DCOR``).
 
 
-    In Virtual Machine Manager, add a "Filesystem" hardware. Choose "managed" mode
-    and set the source path to where the repositories are located on the host
-    machine (``/home/paul/repos/DCOR``). Set the target path to "/repos".
+    In Virtual Machine Manager, add a "Filesystem" hardware. Choose "Path" driver,
+    "Passthrough" mode, "Default" write policy and set the source path to where
+    the repositories are located on the host machine (``/home/paul/repos/DCOR``).
+    Set the target path to "/repos".
     
     On the guest machine, add the following line to `/etc/fstab`:
     
@@ -46,11 +47,10 @@ DCOR extensions installed in editable mode.
     
     After ``mkdir /dcor-repos`` and ``mount /dcor-repos``, you can then access
     the repositories of the host machine directly from the guest machine.
-    In the "managed" mode, the guest system can set up its own permissions which
-    don't affect permissions in the host system. In order for that to work,
-    the libvirt user must have rw permissions. The easiest way to achieve that
+    In order for everything to work properly, libvirt needs access to
+    ``/home/paul/repos/DCOR``. The easiest way to achieve that
     is to set the libvirt user to your user name, i.e. edit ``/etc/libvirt/qemu.conf``
-    and set ``user = "paul"``.
+    and set ``user = "paul"`` (``systemctl restart libvirtd`` after doing so).
 
 
 Let's first choose a directory where all DCOR-related repositories will be
