@@ -45,7 +45,8 @@ DCOR extensions installed in editable mode.
     
        /repos   /dcor-repos    9p  trans=virtio,version=9p2000.L,rw    0   0
     
-    After ``mkdir /dcor-repos`` and ``mount /dcor-repos``, you can then access
+    After ``mkdir /dcor-repos``, ``chmod a+rx /dcor-repos``,
+    and ``mount /dcor-repos``, you can then access
     the repositories of the host machine directly from the guest machine.
     In order for everything to work properly, libvirt needs access to
     ``/home/paul/repos/DCOR``. The easiest way to achieve that

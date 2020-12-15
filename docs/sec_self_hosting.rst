@@ -261,3 +261,67 @@ Known Issues
 - When setting up CKAN error email notifications, emails are sent for every file
   accessed on the server. Set the logging level to "WARNING" in all sections
   in ``/etc/ckan/default/ckan.ini``.
+
+- If you get the following errors in ``/var/log/ckan/ckan-uwsgi.stderr.log``:
+
+  .. code::
+
+    Error processing line 1 of /usr/lib/ckan/default/lib/python3.8/site-packages/ckanext-dcor-theme-nspkg.pth:
+
+      Traceback (most recent call last):
+        File "/usr/lib/python3.8/site.py", line 175, in addpackage
+          exec(line)
+        File "<string>", line 1, in <module>
+        File "<frozen importlib._bootstrap>", line 553, in module_from_spec
+      AttributeError: 'NoneType' object has no attribute 'loader'
+
+    Remainder of file ignored
+
+  Not sure what is causing this, but it was solved for me by editing
+  the relevant .pth file. Add a new line after the first semicolon.
+
+  From
+
+  .. code::
+
+    import sys, types, os;has_mfs = sys.version_info > (3, 8);p = os.path.join(sys._getframe(1).$
+
+  to
+
+  .. code::
+
+    import sys, types, os;
+    has_mfs = sys.version_info > (3, 8);p = os.path.join(sys._getframe(1).$
+
+  .. code::
+
+    sed -i -- 's/os;has_mfs/os;\nhas_mfs/g' /usr/lib/ckan/default/lib/python3.8/site-packages/ckan*.pth
+
+- If you get import errors like this and you are running a development server:
+
+  .. code::
+
+    Traceback (most recent call last):
+      File "/etc/ckan/default/wsgi.py", line 12, in <module>
+        application = make_app(config)
+      File "/usr/lib/ckan/default/src/ckan/ckan/config/middleware/__init__.py", line 56, in make_app
+        load_environment(conf)
+      File "/usr/lib/ckan/default/src/ckan/ckan/config/environment.py", line 123, in load_environment
+        p.load_all()
+      File "/usr/lib/ckan/default/src/ckan/ckan/plugins/core.py", line 140, in load_all
+        load(*plugins)
+      File "/usr/lib/ckan/default/src/ckan/ckan/plugins/core.py", line 154, in load
+        service = _get_service(plugin)
+      File "/usr/lib/ckan/default/src/ckan/ckan/plugins/core.py", line 257, in _get_service
+        raise PluginNotFoundException(plugin_name)
+    ckan.plugins.core.PluginNotFoundException: dcor_schemas
+
+  Please make sure that the ckan process/user has read (execute for directories)
+  permission. The following might help, or you run UWSGI as root.
+
+  .. code::
+
+    chmod a+x /dcor-repos/*
+    find /dcor-repos -type d -name ckanext |  xargs -0 chmod -R a+rx
+    chmod -R a+rx /dcor-repos/dcor_control
+    chmod -R a+rx /dcor-repos/dcor_shared
