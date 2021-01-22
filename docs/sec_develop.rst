@@ -72,13 +72,16 @@ forking any of these repositories, you will wnat to run
    git clone https://github.com/DCOR-dev/ckanext-dcor_schemas.git
    git clone https://github.com/DCOR-dev/ckanext-dcor_theme.git
 
-Next, install each of those repositories in the CKAN virtual environment.
+Next, install each of those repositories in the CKAN virtual environment
+(in the exact same order).
 
 .. code::
 
     source /usr/lib/ckan/default/bin/activate
     cd /dcor-repos
     pip install --upgrade pip wheel
+    # shared extension dependency
+    pip install -e dcor_shared
     # extensions
     pip install -e ckanext-dc_log_view
     pip install -e ckanext-dc_serve
@@ -86,14 +89,6 @@ Next, install each of those repositories in the CKAN virtual environment.
     pip install -e ckanext-dcor_depot
     pip install -e ckanext-dcor_schemas
     pip install -e ckanext-dcor_theme
-    # extension dependencies
-    pip install -e dcor_shared
-    pip install -r ckanext-dc_log_view/requirements.txt
-    pip install -r ckanext-dc_serve/requirements.txt
-    pip install -r ckanext-dc_view/requirements.txt
-    pip install -r ckanext-dcor_depot/requirements.txt
-    pip install -r ckanext-dcor_schemas/requirements.txt
-    pip install -r ckanext-dcor_theme/requirements.txt
     # dcor control (this must be installed at the very end)
     pip install -e dcor_control
 
