@@ -2,7 +2,7 @@ dclab>=0.27.8
 matplotlib
 numpy
 scipy
-sphinx>=1.6.4
+#sphinx>=1.6.4
 sphinxcontrib.bibtex
 sphinx_rtd_theme
 
