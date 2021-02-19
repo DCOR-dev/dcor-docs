@@ -158,8 +158,8 @@ to test the DCOR extensions (e.g. we don't need datastore).
 
 - Initialize the testing db::
 
-  export CKAN_INI=/etc/ckan/default/test-dcor.ini
-  ckan db init
+    export CKAN_INI=/etc/ckan/default/test-dcor.ini
+    ckan db init
 
 You can then run the tests with e.g.::
 
