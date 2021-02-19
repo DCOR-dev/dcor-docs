@@ -156,6 +156,11 @@ to test the DCOR extensions (e.g. we don't need datastore).
 
 - Configure `Solr Multi-core <https://docs.ckan.org/en/2.9/contributing/test.html?highlight=testing#configure-solr-multi-core>`_.
 
+- Initialize the testing db::
+
+  export CKAN_INI=/etc/ckan/default/test-dcor.ini
+  ckan db init
+
 You can then run the tests with e.g.::
 
   export CKAN_INI=/etc/ckan/default/test-dcor.ini
