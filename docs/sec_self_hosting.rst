@@ -27,7 +27,7 @@ packages:
    # needed for building packages that DCOR depends on (dclab)
    apt install -y gcc python3-dev
    # additional tools that you might find useful, but are not actually required
-   apt install -y aptitude net-tools mlocate screen needrestart
+   apt install -y aptitude net-tools mlocate screen needrestart python-is-python3
 
 
 Install CKAN:
