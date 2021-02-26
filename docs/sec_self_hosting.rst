@@ -169,6 +169,36 @@ You can then run the tests with e.g.::
 
 SSL
 ===
+
+You have two options. If you server is reachable through the internet, you
+should use Let's encrypt (or a certificate from your organization) to set
+up SSL. If you are hosting your server on the intranet (clinics scenario),
+then you should create your own certificate and distribute it to your
+users
+
+
+Creating an SSL certificate (Intranet only)
+-------------------------------------------
+Start by creating your certificate (valid for 10 years)::
+
+  openssl req -newkey rsa:4096 -x509 -sha256 -days 3650 -nodes -out fqdn.cert -keyout fqdn.key
+
+where `fqdn` is your fully qualified domain name (FQDN) which maps to the
+server's IP address. Make sure to enter it in the dialog (otherwise use
+the IP address). This makes connection tests easier (e.g. if you only have
+SSH access to the machine and need to use SSH tunneling to connect to the
+CKAN instance by mapping its FQDN in the `/etc/hosts` file to `127.0.0.1`
+on the testing client).
+
+You may want to create an :ref:`encrypted access token <sec_sh_access_token>`
+for your users.
+
+Now proceed with the SSL configuration below, replacing "dcor.mpl.mpg.de"
+with your FQDN.
+
+
+Configuring SSL
+---------------
 Encrypting data transfer should be a priority for you. If your server
 is available online, you can use e.g. `Let's Encrypt <https://letsencrypt.org/>`_
 to obtain an SSL certificate.
@@ -176,10 +206,7 @@ If you are hosting CKAN/DCOR internally in your organization, you will have
 to create a self-signed certificate and distribute the public key to the
 client machines manually.
 
-
-First copy the certificate to ``/etc/ssl/private``.
-
-.. code::
+First copy the certificate to ``/etc/ssl/private``::
 
    cp dcor.mpl.mpg.de.cert /etc/ssl/certs/
    cp dcor.mpl.mpg.de.key /etc/ssl/private/
@@ -195,9 +222,7 @@ First copy the certificate to ``/etc/ssl/private``.
    of the .cert file with that.
 
 Then, edit ``/etc/nginx/sites-enabled/ckan`` and replace its content with
-the following (change ``dcor.mpl.mpg.de`` to whatever domain you use).
-
-.. code::
+the following (change ``dcor.mpl.mpg.de`` to whatever domain you use)::
 
    proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache:30m max_size=250m;
    proxy_temp_path /tmp/nginx_proxy 1 2;
@@ -263,6 +288,53 @@ the following (change ``dcor.mpl.mpg.de`` to whatever domain you use).
        ssl_certificate "/etc/ssl/certs/ssl-cert-snakeoil.pem";
        ssl_certificate_key "/etc/ssl/private/ssl-cert-snakeoil.key";
    }
+
+.. _sec_sh_access_token:
+
+Creating an encrypted access token
+==================================
+Encrypted access tokens are used to safely transfer the SSL certificate
+and the user's API Key from the server to the user. This is especially
+important in scenarios where self-signed SSL certificates are used
+and where users are not allowed to register on their own to prevent
+man-in-the-middle attacks.
+
+An encrypted access token is an encrypted zip file with the suffix
+".dcor-access" that contains the server's SSL certificate "server.cert"
+and the user's API key "api_key.txt". DCOR-Aid can use such an access token
+to automatically setup the server connection.
+
+.. note::
+
+    To create good passwords, you can use this command::
+
+      dd if=/dev/urandom bs=1M count=10 status=none | md5sum | awk '{ print $1 }'
+
+Steps to create an access token:
+
+1. create a CKAN user::
+
+     # set-up the CKAN environment
+     source /usr/lib/ckan/default/bin/activate
+     export CKAN_INI=/etc/ckan/default/ckan.ini
+     # create a user (use a good password)
+     ckan user add your_username
+     # obtain the API key (if this does not work, you have to login
+     # as that user and create an api key)
+     ckan user show your_username | grep apikey
+     # write the API key to a text file
+     echo 7c0c7203-4e25-4b14-a118-553c496a7a52 > api_key.txt
+     # copy the public SSL certificate to the current directory
+     cp /etc/ssl/certs/fqdn.cert ./server.cert
+     # creat the encrypted access token (use a good encryption passoword)
+     zip -e your_username.dcor-access api_key.txt server.cert
+     # cleanup
+     rm api_key.txt server.cert
+
+You should send the file `your_username.dcor-access` to your user. Please
+send the encryption password of the access token via a different channel.
+Especially in the context of hospitals (i.e. data protection), this is
+critical.
 
 
 Unattended upgrades
