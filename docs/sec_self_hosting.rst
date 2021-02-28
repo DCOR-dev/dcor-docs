@@ -441,3 +441,46 @@ Known Issues
     find /dcor-repos -type d -name ckanext |  xargs -0 chmod -R a+rx
     chmod -R a+rx /dcor-repos/dcor_control
     chmod -R a+rx /dcor-repos/dcor_shared
+
+
+- If you are having issues with HDF5 file locking and are storing your
+  data on a network file storage:
+
+  .. code::
+
+    Traceback (most recent call last):
+      File "/usr/lib/ckan/default/lib/python3.8/site-packages/rq/worker.py", line 812, in perform_job
+        rv = job.perform()
+      File "/usr/lib/ckan/default/lib/python3.8/site-packages/rq/job.py", line 588, in perform
+        self._result = self._execute()
+      File "/usr/lib/ckan/default/lib/python3.8/site-packages/rq/job.py", line 594, in _execute
+        return self.func(*self.args, **self.kwargs)
+      File "/usr/lib/ckan/default/lib/python3.8/site-packages/ckanext/dcor_schemas/jobs.py", line 27, in set_dc_config_job
+        with dclab.new_dataset(path) as ds:
+      File "/usr/lib/ckan/default/lib/python3.8/site-packages/dclab/rtdc_dataset/load.py", line 63, in new_dataset
+        return load_file(data, identifier=identifier, **kwargs)
+      File "/usr/lib/ckan/default/lib/python3.8/site-packages/dclab/rtdc_dataset/load.py", line 22, in load_file
+        return fmt(path, identifier=identifier, **kwargs)
+      File "/usr/lib/ckan/default/lib/python3.8/site-packages/dclab/rtdc_dataset/fmt_hdf5.py", line 194, in __init__
+        self._h5 = h5py.File(h5path, mode="r")
+      File "/usr/lib/ckan/default/lib/python3.8/site-packages/h5py/_hl/files.py", line 424, in __init__
+        fid = make_fid(name, mode, userblock_size,
+      File "/usr/lib/ckan/default/lib/python3.8/site-packages/h5py/_hl/files.py", line 190, in make_fid
+        fid = h5f.open(name, flags, fapl=fapl)
+      File "h5py/_objects.pyx", line 54, in h5py._objects.with_phil.wrapper
+      File "h5py/_objects.pyx", line 55, in h5py._objects.with_phil.wrapper
+      File "h5py/h5f.pyx", line 96, in h5py.h5f.open
+    OSError: Unable to open file (unable to lock file, errno = 37, error message = 'No locks available')
+
+  You have to disable file locking via the environment variable
+  `HDF5_USE_FILE_LOCKING='FALSE'`. The most convenient fix is to add the line::
+
+    export HDF5_USE_FILE_LOCKING='FALSE'
+
+  to `/usr/lib/ckan/default/bin/activate`.
+
+  Also, you will have to set the environment variable for the supervisord
+  worker jobs `/etc/supervisor/conf.d/ckan-worker*.conf`::
+
+    # put this before the "command=" option.
+    environment=HDF5_USE_FILE_LOCKING=FALSE
