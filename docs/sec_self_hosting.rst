@@ -313,6 +313,13 @@ the following (change ``dcor.mpl.mpg.de`` to whatever domain you use)::
        ssl_certificate_key "/etc/ssl/private/ssl-cert-snakeoil.key";
    }
 
+
+.. warning::
+
+    Using workers does not work as expected. There is something messed
+    up. Please read https://github.com/ckan/ckan/issues/5933 before you
+    go on.
+
 Now, we need to modify the CKAN uWSGI file at
 /etc/ckan/default/ckan-uwsgi.ini::
 
@@ -329,7 +336,7 @@ Now, we need to modify the CKAN uWSGI file at
     module          =  wsgi:application
     master          =  true
     pidfile         =  /tmp/%n.pid
-    harakiri        =  720
+    harakiri        =  7200
     max-requests    =  5000
     vacuum          =  true
     callable        =  application
@@ -337,7 +344,7 @@ Now, we need to modify the CKAN uWSGI file at
 
     ; Set the number of workers to something > 1, otherwise
     ; only one client can connect.
-    workers         =  100
+    workers         =  10
     strict          =  true
 
 .. _sec_sh_access_token:
