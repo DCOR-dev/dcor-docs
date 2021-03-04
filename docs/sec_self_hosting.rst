@@ -250,28 +250,28 @@ the following (change ``dcor.mpl.mpg.de`` to whatever domain you use)::
        #location = /.well-known/security.txt { return 404; }
 
 
-        # Do not cache downloads of .rtdc data
-        location ~ \.(rtdc)$ {
-            proxy_pass http://127.0.0.1:8080/$request_uri;
-            proxy_set_header Host $host;
-            # Disable the temporary file size, otherwise nginx copies the
-            # whole .rtdc file somewhere on disk (for every download!).
-            # In order for this to work, the CKAN uWSGI has to be configured
-            # with:
-            #
-            #   ; use HTTP1.1 (keep-alive)
-            #   http11-socket = 127.0.0.1:8080
-            #   ; set number of workers to something > 1, otherwise
-            #   ; only one client can connect.
-            #   workers = 100
-            #
-            # Setting the max temp file size to 0 is most important.
-            proxy_max_temp_file_size 0;
-            # These settings kind of just make it look better.
-            proxy_store off;
-            proxy_cache off;
-            gzip off;
-        }
+       # Do not cache downloads of .rtdc data
+       location ~ \.(rtdc)$ {
+           proxy_pass http://127.0.0.1:8080/$request_uri;
+           proxy_set_header Host $host;
+           # Disable the temporary file size, otherwise nginx copies the
+           # whole .rtdc file somewhere on disk (for every download!).
+           # In order for this to work, the CKAN uWSGI has to be configured
+           # with:
+           #
+           #   ; use HTTP1.1 (keep-alive)
+           #   http11-socket = 127.0.0.1:8080
+           #   ; set number of workers to something > 1, otherwise
+           #   ; only one client can connect.
+           #   workers = 100
+           #
+           # Setting the max temp file size to 0 is most important.
+           proxy_max_temp_file_size 0;
+           # These settings kind of just make it look better.
+           proxy_store off;
+           proxy_cache off;
+           gzip off;
+       }
 
        location / {
            proxy_pass http://127.0.0.1:8080/;
