@@ -197,8 +197,8 @@ Now proceed with the SSL configuration below, replacing "dcor.mpl.mpg.de"
 with your FQDN.
 
 
-Configuring SSL
----------------
+Configuring nginx (SSL and uWSGI proxy)
+---------------------------------------
 Encrypting data transfer should be a priority for you. If your server
 is available online, you can use e.g. `Let's Encrypt <https://letsencrypt.org/>`_
 to obtain an SSL certificate.
@@ -249,6 +249,30 @@ the following (change ``dcor.mpl.mpg.de`` to whatever domain you use)::
        #location ^~ /sitemap { return 404; }
        #location = /.well-known/security.txt { return 404; }
 
+
+        # Do not cache downloads of .rtdc data
+        location ~ \.(rtdc)$ {
+            proxy_pass http://127.0.0.1:8080/$request_uri;
+            proxy_set_header Host $host;
+            # Disable the temporary file size, otherwise nginx copies the
+            # whole .rtdc file somewhere on disk (for every download!).
+            # In order for this to work, the CKAN uWSGI has to be configured
+            # with:
+            #
+            #   ; use HTTP1.1 (keep-alive)
+            #   http11-socket = 127.0.0.1:8080
+            #   ; set number of workers to something > 1, otherwise
+            #   ; only one client can connect.
+            #   workers = 100
+            #
+            # Setting the max temp file size to 0 is most important.
+            proxy_max_temp_file_size 0;
+            # These settings kind of just make it look better.
+            proxy_store off;
+            proxy_cache off;
+            gzip off;
+        }
+
        location / {
            proxy_pass http://127.0.0.1:8080/;
            proxy_set_header Host $host;
@@ -288,6 +312,33 @@ the following (change ``dcor.mpl.mpg.de`` to whatever domain you use)::
        ssl_certificate "/etc/ssl/certs/ssl-cert-snakeoil.pem";
        ssl_certificate_key "/etc/ssl/private/ssl-cert-snakeoil.key";
    }
+
+Now, we need to modify the CKAN uWSGI file at
+/etc/ckan/default/ckan-uwsgi.ini::
+
+
+    [uwsgi]
+
+    ; Since we are behind a webserver (proxy), we use the socket variant.
+    ; We use HTTP1.1 (keep-alives)
+    http11-socket   =  127.0.0.1:8080
+    uid             =  www-data
+    gid             =  www-data
+    wsgi-file       =  /etc/ckan/default/wsgi.py
+    virtualenv      =  /usr/lib/ckan/default
+    module          =  wsgi:application
+    master          =  true
+    pidfile         =  /tmp/%n.pid
+    harakiri        =  720
+    max-requests    =  5000
+    vacuum          =  true
+    callable        =  application
+    buffer-size     =  32768
+
+    ; Set the number of workers to something > 1, otherwise
+    ; only one client can connect.
+    workers         =  100
+    strict          =  true
 
 .. _sec_sh_access_token:
 
