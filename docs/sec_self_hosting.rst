@@ -436,9 +436,7 @@ Known Issues
   accessed on the server. Set the logging level to "WARNING" in all sections
   in ``/etc/ckan/default/ckan.ini``.
 
-- If you get the following errors in ``/var/log/ckan/ckan-uwsgi.stderr.log``:
-
-  .. code::
+- If you get the following errors in ``/var/log/ckan/ckan-uwsgi.stderr.log``::
 
     Error processing line 1 of /usr/lib/ckan/default/lib/python3.8/site-packages/ckanext-dcor-theme-nspkg.pth:
 
@@ -471,9 +469,7 @@ Known Issues
 
     sed -i -- 's/os;has_mfs/os;\nhas_mfs/g' /usr/lib/ckan/default/lib/python3.8/site-packages/ckan*.pth
 
-- If you get import errors like this and you are running a development server:
-
-  .. code::
+- If you get import errors like this and you are running a development server::
 
     Traceback (most recent call last):
       File "/etc/ckan/default/wsgi.py", line 12, in <module>
@@ -491,9 +487,7 @@ Known Issues
     ckan.plugins.core.PluginNotFoundException: dcor_schemas
 
   Please make sure that the ckan process/user has read (execute for directories)
-  permission. The following might help, or you run UWSGI as root.
-
-  .. code::
+  permission. The following might help, or you run UWSGI as root::
 
     chmod a+x /dcor-repos/*
     find /dcor-repos -type d -name ckanext |  xargs -0 chmod -R a+rx
@@ -502,9 +496,7 @@ Known Issues
 
 
 - If you are having issues with HDF5 file locking and are storing your
-  data on a network file storage:
-
-  .. code::
+  data on a network file storage::
 
     Traceback (most recent call last):
       File "/usr/lib/ckan/default/lib/python3.8/site-packages/rq/worker.py", line 812, in perform_job
@@ -542,3 +534,14 @@ Known Issues
 
     # put this before the "command=" option.
     environment=HDF5_USE_FILE_LOCKING=FALSE
+
+- If uploads to DCOR fail and you are getting these errors in the nginx logs::
+
+    [crit] 983#983: *623 pwrite() "/var/lib/nginx/body/0000000001" failed (28: No space left on device)
+
+
+  This means that your root partition does not have enough free space to
+  cache uploaded files. A workaround is to move the data directly to the
+  block storage on `/data`. Add this in the nginx configuration file::
+
+    client_body_temp_path /data/nginx-upload-temp 1 2;
