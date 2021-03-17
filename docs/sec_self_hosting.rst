@@ -545,3 +545,5 @@ Known Issues
   block storage on `/data`. Add this in the nginx configuration file::
 
     client_body_temp_path /data/nginx-upload-temp 1 2;
+
+  and make sure that `www-data` has rw access to this directory.
