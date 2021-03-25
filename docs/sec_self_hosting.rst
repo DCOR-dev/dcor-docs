@@ -535,6 +535,10 @@ Known Issues
     # put this before the "command=" option.
     environment=HDF5_USE_FILE_LOCKING=FALSE
 
+  Just to be sure, you could also add this to `/etc/environment`::
+
+    HDF5_USE_FILE_LOCKING="FALSE"
+
 - If uploads to DCOR fail and you are getting these errors in the nginx logs::
 
     [crit] 983#983: *623 pwrite() "/var/lib/nginx/body/0000000001" failed (28: No space left on device)
