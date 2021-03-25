@@ -529,8 +529,8 @@ Known Issues
 
   to `/usr/lib/ckan/default/bin/activate`.
 
-  Also, you will have to set the environment variable for the supervisord
-  worker jobs `/etc/supervisor/conf.d/ckan-worker*.conf`::
+  Also, you will have to set the environment variable for all configuration
+  files (uwsgi and worker jobs in  `/etc/supervisor/conf.d/*.conf`)::
 
     # put this before the "command=" option.
     environment=HDF5_USE_FILE_LOCKING=FALSE
@@ -547,3 +547,20 @@ Known Issues
     client_body_temp_path /data/nginx-upload-temp 1 2;
 
   and make sure that `www-data` has rw access to this directory.
+
+- If your root partition is suddenly full, this might be due to the systemd
+  journal in `/var/logs`. You can free up space by running::
+
+    journalctl --vacuum-files=2
+
+  To add a general limit on how large the journal may become, edit the
+  file `etc/systemd/journald.conf` and set::
+
+    SystemMaxUse=200M
+
+  It might also help to remove-purge the `snapd` package::
+
+    apt purge snapd
+    rm -rf /snap
+    rm -rf /var/snap
+    rm -rf /var/lib/snapd
