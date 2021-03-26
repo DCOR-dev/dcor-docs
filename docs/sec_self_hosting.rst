@@ -228,7 +228,7 @@ the following (change ``dcor.mpl.mpg.de`` to whatever domain you use)::
    proxy_temp_path /tmp/nginx_proxy 1 2;
     
    server {
-       client_max_body_size 10G;
+       client_max_body_size 100G;
        listen       443 ssl http2;
        listen       [::]:443 ssl http2;
        server_name  dcor.mpl.mpg.de;        
@@ -344,8 +344,11 @@ Now, we need to modify the CKAN uWSGI file at
 
     ; Set the number of workers to something > 1, otherwise
     ; only one client can connect.
-    workers         =  10
+    ;workers         =  10
     strict          =  true
+    ; Enable post-buffering - not sure exactly how it works, but it avoids
+    ; unexpected closing of the connection by nginx.
+    post-buffering  = 1
 
 .. _sec_sh_access_token:
 
@@ -546,9 +549,10 @@ Known Issues
 
   This means that your root partition does not have enough free space to
   cache uploaded files. A workaround is to move the data directly to the
-  block storage on `/data`. Add this in the nginx configuration file::
+  block storage on `/data`. Add this in the nginx configuration file
+  (`server` section)::
 
-    client_body_temp_path /data/nginx-upload-temp 1 2;
+    client_body_temp_path /data/tmp/nginx 1 2;
 
   and make sure that `www-data` has rw access to this directory.
 
@@ -558,7 +562,7 @@ Known Issues
     journalctl --vacuum-files=2
 
   To add a general limit on how large the journal may become, edit the
-  file `etc/systemd/journald.conf` and set::
+  file `/etc/systemd/journald.conf` and set::
 
     SystemMaxUse=200M
 
@@ -586,7 +590,6 @@ Known Issues
   temporary files under `/tmp`, a behavior that can be controlled via the
   environment variable `TMPDIR`. Thus, the solution is to edit the uwsgi
   supervisor file `/etc/supervisor/conf.d/ckan-uwsgi.conf` and set this
-  `TPMDIR` to something under `/data` (note that this might be slow,
-  ideally you would have a lot of disk space on `/`)::
+  `TPMDIR` to something under `/data`::
 
-    environment=HDF5_USE_FILE_LOCKING=FALSE,TMPDIR=/data/temp_uwsgi
+    environment=HDF5_USE_FILE_LOCKING=FALSE,TMPDIR=/data/tmp/uwsgi
