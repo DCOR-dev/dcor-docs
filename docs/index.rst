@@ -16,7 +16,7 @@ Documentation
    sec_introduction
    sec_user_guide
    sec_faq
-   sec_self_hosting
+   sec_self_hosting/index
    sec_develop
 
 

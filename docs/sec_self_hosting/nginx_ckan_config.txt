@@ -1,0 +1,98 @@
+proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache:30m max_size=250m;
+
+server {
+   client_max_body_size 100G;
+   # Use this if you don't have enough space on your root partition
+   # for caching large uploads (rw-access to www-data).
+   # client_body_temp_path /data/tmp/nginx/client_body 1 2;
+   listen       443 ssl http2;
+   listen       [::]:443 ssl http2;
+   server_name  dcor.mpl.mpg.de;
+
+   ssl_certificate "/etc/ssl/certs/dcor.mpl.mpg.de.cert";
+   ssl_certificate_key "/etc/ssl/private/dcor.mpl.mpg.de.key";
+
+   # Uncoment to avoid robots (only on development machines)
+   #location = /robots.txt { return 200 "User-agent: *\nDisallow: /\n"; }
+
+   # Uncomment to mask other bot's activities
+   #location ^~ /backup { return 404; }
+   #location ^~ /wp { return 404; }
+   #location ^~ /wordpress { return 404; }
+   #location ^~ /old { return 404; }
+   #location ^~ /node/ { return 404; }
+   #location ^~ /server { return 404; }
+   #location ^~ /sitemap { return 404; }
+   #location = /.well-known/security.txt { return 404; }
+
+
+   # Do not cache downloads of .rtdc data
+   location ~ \.(rtdc)$ {
+       proxy_pass http://127.0.0.1:8080/$request_uri;
+       proxy_set_header Host $host;
+       # Disable the temporary file size, otherwise nginx copies the
+       # whole .rtdc file somewhere on disk (for every download!).
+       # In order for this to work, the CKAN uWSGI has to be configured
+       # with:
+       #
+       #   ; use HTTP1.1 (keep-alive)
+       #   http11-socket = 127.0.0.1:8080
+       #   ; set number of workers to something > 1, otherwise
+       #   ; only one client can connect.
+       #   workers = 100
+       #
+       # Setting the proxy_max_temp_file_size to 0 is most important.
+       # proxy_max_temp_file_size 0;
+       #
+       # EDIT: This does not work. See https://github.com/ckan/ckan/issues/5933
+       proxy_max_temp_file_size 100000m;
+
+       # Use this if you don't have enough space on your root partition
+       # for caching large downloads (rw-access to www-data).
+       # proxy_temp_path /data/tmp/nginx/proxy 1 2;
+
+       # Do not keep any files on disk (only temp files above).
+       proxy_store off;
+       proxy_cache off;
+       gzip off;
+   }
+
+   location / {
+       proxy_pass http://127.0.0.1:8080/;
+       proxy_set_header Host $host;
+       proxy_cache cache;
+       proxy_cache_bypass $cookie_auth_tkt;
+       proxy_no_cache $cookie_auth_tkt;
+       proxy_cache_valid 30m;
+       proxy_cache_key $host$scheme$proxy_host$request_uri;
+       # In emergency comment out line to force caching
+       # proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+   }
+
+}
+
+# Redirect all traffic to SSL
+server {
+   listen 80;
+   listen [::]:80;
+   server_name dcor.mpl.mpg.de;
+   return 301 https://$host$request_uri;
+}
+
+# Optional: Reject traffic that is not directed at `dcor.mpl.mpg.de:80`
+server {
+   listen 80 default_server;
+   listen [::]:80 default_server;
+   server_name _;
+   return 444;
+}
+
+# Optional: Reject traffic that is not directed at `dcor.mpl.mpg.de:443`
+server {
+listen       443 default_server;
+   listen       [::]:443 default_server;
+   server_name  _;
+   return 444;
+   ssl_certificate "/etc/ssl/certs/ssl-cert-snakeoil.pem";
+   ssl_certificate_key "/etc/ssl/private/ssl-cert-snakeoil.key";
+}
