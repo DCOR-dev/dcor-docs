@@ -568,3 +568,25 @@ Known Issues
     rm -rf /snap
     rm -rf /var/snap
     rm -rf /var/lib/snapd
+
+- Problems wih `OSError: [Errno 28] No space left on device` upon uploads of
+  large files. The reason might be that uwsgi stores temporary files in /tmp.
+  You could check this with::
+
+    (default) root@server:/# lsof / | grep "/tmp"
+    uwsgi      1301         www-data    7u   REG   0,28 2038633555 1304952 /tmp/#1304952 (deleted)
+    uwsgi      1301         www-data   12u   REG   0,28 1558086333 1304953 /tmp/#1304953 (deleted)
+
+  You could also check whether your CKAN installation is responsible for this
+  (`df -h` shows less space than there should be) by restarting all services::
+
+    supervisorctl restart all
+
+  According to a PDF file that I found somewhere, uwsgi always stores its
+  temporary files under `/tmp`, a behavior that can be controlled via the
+  environment variable `TMPDIR`. Thus, the solution is to edit the uwsgi
+  supervisor file `/etc/supervisor/conf.d/ckan-uwsgi.conf` and set this
+  `TPMDIR` to something under `/data` (note that this might be slow,
+  ideally you would have a lot of disk space on `/`)::
+
+    environment=HDF5_USE_FILE_LOCKING=FALSE,TMPDIR=/data/temp_uwsgi
