@@ -30,21 +30,9 @@ server {
    location ~ \.(rtdc)$ {
        proxy_pass http://127.0.0.1:8080/$request_uri;
        proxy_set_header Host $host;
-       # Disable the temporary file size, otherwise nginx copies the
-       # whole .rtdc file somewhere on disk (for every download!).
-       # In order for this to work, the CKAN uWSGI has to be configured
-       # with:
-       #
-       #   ; use HTTP1.1 (keep-alive)
-       #   http11-socket = 127.0.0.1:8080
-       #   ; set number of workers to something > 1, otherwise
-       #   ; only one client can connect.
-       #   workers = 100
-       #
-       # Setting the proxy_max_temp_file_size to 0 is most important.
-       # proxy_max_temp_file_size 0;
-       #
-       # EDIT: This does not work. See https://github.com/ckan/ckan/issues/5933
+
+       # Cache each and every download on disk to get load off of
+       # the ckan workers (see ckan-uwsgi.ini).
        proxy_max_temp_file_size 100000m;
 
        # Use this if you don't have enough space on your root partition

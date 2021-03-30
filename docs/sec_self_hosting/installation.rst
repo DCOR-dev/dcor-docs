@@ -225,17 +225,12 @@ the following (change ``dcor.mpl.mpg.de`` to whatever domain you use):
 .. literalinclude:: nginx_ckan_config.txt
    :language: nginx
 
-.. warning::
-
-    Using workers does not work as expected. There is something messed
-    up. Please read https://github.com/ckan/ckan/issues/5933 before you
-    go on.
-
 Now, we need to modify the CKAN uWSGI file at
 ``/etc/ckan/default/ckan-uwsgi.ini``:
 
 .. literalinclude:: ckan-uwsgi.ini
    :language: ini
+
 
 .. _sec_sh_access_token:
 
