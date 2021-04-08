@@ -15,20 +15,9 @@ server {
    # Uncoment to avoid robots (only on development machines)
    #location = /robots.txt { return 200 "User-agent: *\nDisallow: /\n"; }
 
-   # Uncomment to mask other bot's activities
-   #location ^~ /backup { return 404; }
-   #location ^~ /wp { return 404; }
-   #location ^~ /wordpress { return 404; }
-   #location ^~ /old { return 404; }
-   #location ^~ /node/ { return 404; }
-   #location ^~ /server { return 404; }
-   #location ^~ /sitemap { return 404; }
-   #location = /.well-known/security.txt { return 404; }
-
-
    # Do not cache downloads of .rtdc data
    location ~ \.(rtdc)$ {
-       proxy_pass http://127.0.0.1:8080/$request_uri;
+       proxy_pass http://127.0.0.1:8080$request_uri;
        proxy_set_header Host $host;
 
        # Cache each and every download on disk to get load off of
@@ -45,7 +34,20 @@ server {
        gzip off;
    }
 
-   location / {
+   # allow-list for ckan-related directories
+   location ~ /(api|ckan-admin|dashboard|dataset|fonts|group|images|login_generic|organization|revision|user|webassets) {
+       proxy_pass http://127.0.0.1:8080$request_uri;
+       proxy_set_header Host $host;
+       proxy_read_timeout 7200;
+       proxy_cache cache;
+       proxy_cache_bypass $cookie_auth_tkt;
+       proxy_no_cache $cookie_auth_tkt;
+       proxy_cache_valid 30m;
+       proxy_cache_key $host$scheme$proxy_host$request_uri;
+   }
+
+   # ckan root
+   location = / {
        proxy_pass http://127.0.0.1:8080/;
        proxy_set_header Host $host;
        proxy_read_timeout 7200;
@@ -54,8 +56,13 @@ server {
        proxy_no_cache $cookie_auth_tkt;
        proxy_cache_valid 30m;
        proxy_cache_key $host$scheme$proxy_host$request_uri;
-       # In emergency comment out line to force caching
-       # proxy_ignore_headers X-Accel-Expires Expires Cache-Control;
+   }
+
+   # Deny all access to other directories that bots search
+   # (e.g. "/wp", "/wordpress", "/old", "/.git") which takes
+   # load off of the uWSGI workers.
+   location / {
+       return 404;
    }
 
 }
