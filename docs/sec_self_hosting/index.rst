@@ -9,4 +9,5 @@ Self-Hosting
    :caption: Contents:
 
    installation
+   operations
    troubleshooting
