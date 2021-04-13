@@ -9,7 +9,6 @@ This section describes how to setup your own DCOR production instance.
 
 Ubuntu and CKAN
 ===============
-
 Please use an `Ubuntu 20.04 <https://ubuntu.com/download/server>`_
 installation for any development or production usage. This makes it
 easier to give support and track down issues.
@@ -78,7 +77,6 @@ DCOR Extensions
 
 Installation
 ------------
-
 Whenever you need to run the ``ckan``/``dcor`` commands or have to update
 Python packages, you have to first activate the CKAN virtual environment.
 
