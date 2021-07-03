@@ -35,7 +35,7 @@ server {
    }
 
    # allow-list for ckan-related directories
-   location ~ /(api|ckan-admin|dashboard|dataset|fonts|group|images|login_generic|organization|revision|user|webassets) {
+   location ~ /(api|ckan-admin|dashboard|dataset|favicon.ico|fonts|group|images|login_generic|organization|revision|user|webassets) {
        proxy_pass http://127.0.0.1:8080$request_uri;
        proxy_set_header Host $host;
        proxy_read_timeout 7200;
