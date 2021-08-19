@@ -19,6 +19,8 @@ Otherwise, the installation instructions are identical to those in the
 DCOR Extensions
 ===============
 
+.. _sec_dev_install:
+
 Installation
 ------------
 This part differs from the installation for production. We want to have the

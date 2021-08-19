@@ -10,4 +10,5 @@ Self-Hosting
 
    installation
    operations
+   upgrade
    troubleshooting

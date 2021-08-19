@@ -2,24 +2,6 @@
 Operations and maintenance
 ==========================
 
-Updating dcor
-=============
-
-Updating DCOR is done via the command::
-
-    dcor update
-
-This will update all extensions to the latest release (if installed from
-PyPI) or to the latest commit (if installed from git repositories).
-
-After each update, you should make sure that your installation is still set
-up correctly. The following command will check your configuration files
-(amongst other things)::
-
-    dcor inspect
-
-
-
 .. _sec_sh_access_token:
 
 Creating an encrypted access token
