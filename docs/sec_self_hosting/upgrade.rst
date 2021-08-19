@@ -22,8 +22,8 @@ up correctly. The following command will check your configuration files
 Upgrading CKAN/DCOR
 ===================
 
-If you would like to upgrade CKAN via a .deb package (recommended), you have
-to install DCOR again (because the environment will be reset).
+If you would like to upgrade CKAN via a .deb package (recommended), you may have
+to install DCOR again (because the environment might be reset).
 
 1. https://docs.ckan.org/en/2.9/maintaining/upgrading/index.html#upgrading
 
