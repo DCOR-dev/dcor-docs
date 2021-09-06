@@ -160,3 +160,11 @@ Troubleshooting
   `TPMDIR` to something under `/data`::
 
     environment=HDF5_USE_FILE_LOCKING=FALSE,TMPDIR=/data/tmp/uwsgi
+
+- If downloads of large resources are aborted by the server after a short
+  time, this might be because nginx caches the download on the root partition
+  which does not have enough free space. You have to specify a cache location
+  with sufficient free space in `/etc/nginx/sites-enabled/ckan` by uncommenting
+  the line::
+
+    proxy_temp_path /data/tmp/nginx/proxy 1 2;
