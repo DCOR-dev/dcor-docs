@@ -168,3 +168,15 @@ Troubleshooting
   the line::
 
     proxy_temp_path /data/tmp/nginx/proxy 1 2;
+
+- If uploads fail with a timeout error message and in the logs you get::
+
+    OSError: timeout during read(57344) on wsgi.input
+    2021-09-07 09:20:43 uWSGI 127.0.0.1 (HTTP/1.0 500) POST /api/3/action/resource_create => 0 bytes in 8644 msecs to DCOR-Aid/0.6.4
+
+  that probably means that the socket-timeout value for uWSGI is too low.
+  A reason for that could be e.g. that the resources are written to a location
+  with low write speed (e.g. NFS). A solution is to add the socket-timeout to
+  `/etc/ckan/default/ckan-uwsgi.ini`::
+
+    socket-timeout     = 7200
