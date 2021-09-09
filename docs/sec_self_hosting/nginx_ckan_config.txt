@@ -39,6 +39,7 @@ server {
        proxy_pass http://127.0.0.1:8080$request_uri;
        proxy_set_header Host $host;
        proxy_read_timeout 7200;
+       proxy_send_timeout 7200;
        proxy_cache cache;
        proxy_cache_bypass $cookie_auth_tkt;
        proxy_no_cache $cookie_auth_tkt;
@@ -50,7 +51,6 @@ server {
    location = / {
        proxy_pass http://127.0.0.1:8080/;
        proxy_set_header Host $host;
-       proxy_read_timeout 7200;
        proxy_cache cache;
        proxy_cache_bypass $cookie_auth_tkt;
        proxy_no_cache $cookie_auth_tkt;

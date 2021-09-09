@@ -180,3 +180,14 @@ Troubleshooting
   `/etc/ckan/default/ckan-uwsgi.ini`::
 
     socket-timeout     = 7200
+
+- If uploads fail with the following error message in the ckan-uwsgi logs::
+
+    2021-09-08 18:46:16 - [uwsgi-body-read] Error reading 6563 bytes. Content-Length: 15428164609 consumed: 2150065757 left: 13278098852 message: Client closed connection
+
+    [...]
+
+    OSError: error during read(8192) on wsgi.input
+
+  This could mean (if you are storing data on slow storage) that the
+  `send_timeout` in the nginx configuration is not large enough.
