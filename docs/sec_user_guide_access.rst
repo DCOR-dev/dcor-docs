@@ -116,10 +116,10 @@ access DCOR data with dclab, please refer to the
 
   # do something with one of the resources in dclab
   with dclab.new_dataset(resource_ids[47]) as ds:
-    kde = ds.get_kde_scatter(xax="area_um", yax="deform")
-    ax = plt.subplot(111, title=ds.config['experiment']['sample'])
-    sc = ax.scatter(ds["area_um"], ds["deform"], c=kde, marker=".")
-    ax.set_xlabel(dclab.dfn.get_feature_label("area_um"))
-    ax.set_ylabel(dclab.dfn.get_feature_label("deform"))
-    plt.colorbar(sc, label="kernel density estimate [a.u]")
-    plt.show()
+      kde = ds.get_kde_scatter(xax="area_um", yax="deform")
+      ax = plt.subplot(111, title=ds.config['experiment']['sample'])
+      sc = ax.scatter(ds["area_um"], ds["deform"], c=kde, marker=".")
+      ax.set_xlabel(dclab.dfn.get_feature_label("area_um"))
+      ax.set_ylabel(dclab.dfn.get_feature_label("deform"))
+      plt.colorbar(sc, label="kernel density estimate [a.u]")
+      plt.show()
