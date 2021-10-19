@@ -27,8 +27,13 @@ author = 'Paul Müller'
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.intersphinx',
-              'sphinx.ext.mathjax',
+extensions = [
+    'matplotlib.sphinxext.plot_directive',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.mathjax',
+    'sphinx_rtd_theme',
+    'IPython.sphinxext.ipython_directive',
+    'IPython.sphinxext.ipython_console_highlighting',
 ]
 
 # List of patterns, relative to source directory, that match files and
@@ -37,6 +42,9 @@ extensions = ['sphinx.ext.intersphinx',
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
 master_doc = 'index'
+
+# include source of matplotlib plots
+plot_include_source = True
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -56,10 +64,11 @@ html_favicon = "logo/favicon.ico"
 html_static_path = ['_static']
 
 # Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {"python": ('https://docs.python.org/', None),
-                       "numpy": ('http://docs.scipy.org/doc/numpy', None),
-                       "skimage": ('http://scikit-image.org/docs/stable/', None),
-                       "scipy": ('https://docs.scipy.org/doc/scipy/reference/', None),
-                       "dclab": ('http://dclab.readthedocs.io/en/stable', None),
-                       "shapeout2": ('http://shapeout2.readthedocs.io/en/stable', None),
-                       }
+intersphinx_mapping = {
+    "python": ('https://docs.python.org/', None),
+    "numpy": ('http://docs.scipy.org/doc/numpy', None),
+    "skimage": ('http://scikit-image.org/docs/stable/', None),
+    "scipy": ('https://docs.scipy.org/doc/scipy/reference/', None),
+    "dclab": ('http://dclab.readthedocs.io/en/stable', None),
+    "shapeout2": ('http://shapeout2.readthedocs.io/en/stable', None),
+    }
