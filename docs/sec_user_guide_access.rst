@@ -47,12 +47,12 @@ list all details of
   dataset_dict = api.get("package_show", id="figshare-7771184-v2")
   # the first ten entries of the dataset dictionary
   for key in list(dataset_dict.keys())[:10]:
-    print(f"{key:18s}: {dataset_dict[key]}")
+      print(f"{key:18s}: {dataset_dict[key]}")
   # all resource names in the dataset
   print([r["name"] for r in dataset_dict["resources"]])
   # the first ten metadata entries of the first resource
   for key in list(dataset_dict["resources"][0].keys())[:10]:
-    print(f"{key:31s}: {dataset_dict['resources'][0][key]}")
+      print(f"{key:31s}: {dataset_dict['resources'][0][key]}")
 
 .. note::
 
