@@ -80,8 +80,8 @@ searching for datasets:
 
 
 
-Example: List all IDs of .rtdc resources for a DCOR circle
-===========================================================
+Example: List all RT-DC resources for a DCOR circle
+---------------------------------------------------
 Let's say you are interested in all RT-DC data files in a DCOR circle,
 because you would like to run an automated analysis with dclab.
 The following script creates a list of IDs ``resource_ids`` with all RT-DC
@@ -123,3 +123,61 @@ access DCOR data with dclab, please refer to the
       ax.set_ylabel(dclab.dfn.get_feature_label("deform"))
       plt.colorbar(sc, label="kernel density estimate [a.u]")
       plt.show()
+
+
+Example: Order all resources of a DCOR circle according to flow rate
+--------------------------------------------------------------------
+You may need to order your resources according to a certain metadata
+key. You can find all available metadata keys in the resource view
+in the DCOR web interface (scroll all the way down and click "show more").
+In this example, we order all resources according to flow rate
+(the `"dc:setup:flow rate"` resource key).
+
+.. plot::
+
+  import dclab
+  import dcoraid
+  import matplotlib.pylab as plt
+  import numpy as np
+
+  # name of the circle in question
+  circle_name = "figshare-import"
+
+  # dictionary with flow rates of interest
+  flow_rate_ids = {
+      0.04: [],
+      0.06: [],
+      0.12: [],
+      0.16: [],
+      0.32: [],
+      }
+
+  # list of flow rates that don't fit into the above dictionary
+  unsrt_ids = []
+
+  # initialize API (for private datasets, also provide `api_key`)
+  api = dcoraid.CKANAPI("dcor.mpl.mpg.de")
+  air = dcoraid.APIInterrogator(api)
+  # get a list of all datasets for `circle_name`
+  datasets = air.search_dataset(circles=[circle_name])
+  # iterate over all datasets
+  for ds_dict in datasets:
+      # iterate over all resources of a dataset
+      for res_dict in ds_dict["resources"]:
+          # identify RT-DC data
+          if res_dict["mimetype"] == "RT-DC":
+              flow_rate = res_dict.get("dc:setup:flow rate", np.nan)
+              for fr in flow_rate_ids:
+                  if np.allclose(flow_rate, fr):
+                      flow_rate_ids[fr].append(res_dict["id"])
+                      break
+              else:
+                  unsrt_ids.append((flow_rate, res_dict["id"]))
+
+  # plot some statistics
+  ax = plt.subplot(title=f"circle {circle_name}")
+  plt.bar([f"{fr}" for fr in flow_rate_ids] + ["others"],
+          [len(flow_rate_ids[fr]) for fr in flow_rate_ids] + [len(unsrt_ids)])
+  ax.set_xlabel("flow rates [µL/s]")
+  ax.set_ylabel("number of datasets")
+  plt.show()
