@@ -1,3 +1,5 @@
+.. _sec_upload:
+
 ======================
 Uploading data to DCOR
 ======================
