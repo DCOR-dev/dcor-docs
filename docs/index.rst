@@ -14,7 +14,7 @@ Documentation
    :caption: Contents:
 
    sec_introduction
-   sec_user_guide
+   sec_user_guide/index
    sec_faq
    sec_self_hosting/index
    sec_develop
