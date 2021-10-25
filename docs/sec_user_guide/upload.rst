@@ -46,12 +46,21 @@ options.
 You can always run the setup wizard again via the *File* menu.
 
 Once DCOR-Aid is connected to a DCOR instance, go to the *Upload* tab.
-The *New manual upload* option guides you through the metadata entry and
+The *New manual upload* tool button gets you to the metadata entry and
 dataset selection process. It is also possible to upload pre-defined
 upload tasks (see next section).
 
 
 Generating DCOR-Aid upload tasks
 ================================
-TODO
+If you need a way to upload many datasets in an automated manner
+you can make use of .dcoraid-task files. These files are essentially
+upload recipes that can be loaded into DCOR-Aid in the *Upload* tab
+via the *Load upload task(s) from disk* tool button.
+
+The following script :download:`upload_task_generation.py` recursively
+searches a directory tree for .rtdc files and generates .dcoraid-task files.
+
+.. literalinclude:: upload_task_generation.py
+  :language: python
 
