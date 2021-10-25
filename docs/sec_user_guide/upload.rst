@@ -2,6 +2,8 @@
 Uploading data to DCOR
 ======================
 
+.. _sec_upload_prerequisites:
+
 Prerequisites
 =============
 - DCKit: graphical toolkit for the management of RT-DC data
@@ -9,6 +11,8 @@ Prerequisites
 - DCOR-Aid: GUI for managing data on DCOR
   (https://github.com/DCOR-dev/DCOR-Aid/releases)
 
+
+.. _sec_upload_preparation:
 
 Data preparation with DCKit
 ===========================
@@ -27,6 +31,8 @@ You can verify that everything went as intended by running the integrity
 check for the newly generated files. If you are certain that you are not
 losing valuable information, you may also use the repack and strip logs option.
 
+
+.. _sec_upload_dcoraid:
 
 Data upload with DCOR-Aid
 =========================
@@ -50,6 +56,8 @@ The *New manual upload* tool button gets you to the metadata entry and
 dataset selection process. It is also possible to upload pre-defined
 upload tasks (see next section).
 
+
+.. _sec_upload_generate_dcoraid_task:
 
 Generating DCOR-Aid upload tasks
 ================================
