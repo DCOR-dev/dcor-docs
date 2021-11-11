@@ -9,6 +9,20 @@ via the web interface or via the API. With the web interface, you can
 browse and search data in a convenient way with your webbrowser. The API
 allows you to write custom scripts or libraries (DCOR-Aid uses the API).
 
+Note that there are two main DCOR instances. One for development and
+testing (|dcor_dev_image| `DCOR-dev <https://dcor-dev.mpl.mpg.de>`_) and one for
+production use (|dcor_image| `DCOR <https://dcor.mpl.mpg.de>`_). If you
+are new to DCOR, please use the DCOR-dev instance to get to know the system.
+If you are ready to get serious, move on to the production instance.
+
+
+.. |dcor_dev_image| image:: images/dcor-dev.png
+   :height: 1em
+   :target: https://dcor-dev.mpl.mpg.de
+
+.. |dcor_image| image:: images/dcor.png
+   :height: 1em
+   :target: https://dcor.mpl.mpg.de
 
 Access via DCOR-Aid GUI
 =======================
