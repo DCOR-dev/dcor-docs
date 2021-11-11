@@ -36,7 +36,6 @@ losing valuable information, you may also use the *repack and strip logs* option
 
 .. figure:: scrots/upload_dckit_preproc.png
     :target: ../_images/upload_dckit_preproc.png
-    :align: right
 
     DCKit user interface with one .rtdc file loaded that passed all
     integrity checks. DCKit can perform various tasks that are represented
@@ -44,10 +43,18 @@ losing valuable information, you may also use the *repack and strip logs* option
     recommended to at least update the metadata such that the integrity
     checks pass.
 
+
 .. _sec_upload_dcoraid:
 
 Data upload with DCOR-Aid
 =========================
+.. figure:: scrots/upload_dcoraid_wizard.png
+    :target: ../_images/upload_dcoraid_wizard.png
+    :figwidth: 40%
+    :align: right
+
+    The DCOR-Aid setup wizard guides you through the initial setup.
+
 To upload your data to a DCOR instance, you first need to create an account.
 When you start DCOR-Aid for the first time, you will be given several
 options.
@@ -60,12 +67,22 @@ options.
   <https://dcor.mpl.mpg.de/user/register>`_ and generate an API key for DCOR-Aid
   in the DCOR web interface.
 
-You can always run the setup wizard again via the *File* menu.
+You can always run the setup wizard again via the *File* menu to e.g. switch
+from "playground" to the production DCOR server.
+
 
 Once DCOR-Aid is connected to a DCOR instance, go to the *Upload* tab.
-The *New manual upload* tool button gets you to the metadata entry and
-dataset selection process. It is also possible to upload pre-defined
+The *New manual upload* tool button directs you to the metadata entry and
+resource selection process. It is also possible to upload pre-defined
 upload tasks (see next section).
+
+.. figure:: scrots/upload_dcoraid_init.png
+    :target: ../_images/upload_dcoraid_init.png
+
+    The upload tab gives you the option to manually upload datasets or
+    to load auto-generated DCOR-Aid upload task (.dcoraid-task) files via
+    the buttons at the top.
+    Queued and running uploads are then displayed in the table below.
 
 
 .. _sec_upload_generate_dcoraid_task:
