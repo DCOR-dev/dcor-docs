@@ -46,6 +46,9 @@ master_doc = 'index'
 # include source of matplotlib plots
 plot_include_source = True
 
+# enable enumeration of figures
+numfig = True
+
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for

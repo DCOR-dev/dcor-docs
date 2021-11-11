@@ -31,8 +31,18 @@ complete or correct any missing or bad metadata keys and either convert
 the data to the .rtdc file format (for tdms data) or compress the data.
 You can verify that everything went as intended by running the integrity
 check for the newly generated files. If you are certain that you are not
-losing valuable information, you may also use the repack and strip logs option.
+losing valuable information, you may also use the *repack and strip logs* option.
 
+
+.. figure:: scrots/upload_dckit_preproc.png
+    :target: ../_images/upload_dckit_preproc.png
+    :align: right
+
+    DCKit user interface with one .rtdc file loaded that passed all
+    integrity checks. DCKit can perform various tasks that are represented
+    by the tool buttons on the right. Before uploading to DCOR, it is
+    recommended to at least update the metadata such that the integrity
+    checks pass.
 
 .. _sec_upload_dcoraid:
 
@@ -44,8 +54,7 @@ options.
 
 - If you select "Playground", DCOR-Aid will create a testing account
   at https://dcor-dev.mpl.mpg.de for you. All data on that **dev**\elopment
-  is pruned weekly. You the DCOR-dev instance for testing.
-  machine
+  is pruned weekly. You can use the DCOR-dev instance for testing.
 
 - If you select "DCOR", you will have to manually `register at dcor.mpl.mpg.de
   <https://dcor.mpl.mpg.de/user/register>`_ and generate an API key for DCOR-Aid
