@@ -24,9 +24,40 @@ If you are ready to get serious, move on to the production instance.
    :height: 1em
    :target: https://dcor.mpl.mpg.de
 
+
 Access via DCOR-Aid GUI
 =======================
-TODO
+It is possible to access all data on DCOR via your browser by visiting
+https://dcor-dev.mpl.mpg.de. However, you might want to consider using
+DCOR-Aid instead, because:
+
+- You can more easily browse circles and collection in the DCOR-Aid GUI.
+- You can drag and drop resources from DCOR-Aid into Shape-Out
+  (no need to copy and paste resource IDs).
+- DCOR-Aid comes with a resource download manager.
+
+.. figure:: scrots/upload_dcoraid_wizard.png
+    :target: ../_images/upload_dcoraid_wizard.png
+    :figwidth: 40%
+    :align: right
+
+    The DCOR-Aid setup wizard guides you through the initial setup.
+
+If you installed DCOR-Aid for the first time, the setup wizard will
+ask you to choose how you would like to use DCOR-Aid. If you are only
+interested in public data, then choose the *Anonymous* option.
+
+When DCOR-Aid starts, you will then see several tabs. The tab on the right
+*Find Data* allows you to search the DCOR database for datasets and
+resources. If you previously entered an API token, then you can also browse
+all your datasets in the *My Data* tab.
+
+To search for a particular dataset, simply type your search term in the
+search field. If you are interested in more elaborate search options,
+please create an issue at the
+`DCOR-Aid issue page <https://github.com/DCOR-dev/DCOR-Aid/issues>`_.
+
+
 
 
 Access via DCOR-Aid Python library
