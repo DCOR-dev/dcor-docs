@@ -5,9 +5,10 @@ Accessing Data on DCOR
 General remarks
 ===============
 There are two ways of interacting with data on a DCOR instance,
-via the web interface or via the API. With the web interface, you can
-browse and search data in a convenient way with your webbrowser. The API
-allows you to write custom scripts or libraries (DCOR-Aid uses the API).
+via the web interface or via the API. With the web interface (not
+covererd here), you can browse and search data in a convenient way with
+your webbrowser. The API allows you to write custom scripts or libraries
+(DCOR-Aid uses the API).
 
 Note that there are two main DCOR instances. One for development and
 testing (|dcor_dev_image| `DCOR-dev <https://dcor-dev.mpl.mpg.de>`_) and one for
