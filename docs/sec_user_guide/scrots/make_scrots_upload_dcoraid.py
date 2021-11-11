@@ -1,4 +1,4 @@
-"""Screenshots for Uploads (DCKit)"""
+"""Screenshots for Uploads (DCOR-Aid)"""
 import pathlib
 import sys
 import time
@@ -10,7 +10,6 @@ from dcoraid.gui import DCORAid
 from dcoraid.gui.wizard import SetupWizard
 
 sys.path.insert(0, "..")
-
 import upload_task_generation as utg
 
 

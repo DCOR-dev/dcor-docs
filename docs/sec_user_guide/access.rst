@@ -59,6 +59,13 @@ please create an issue at the
 `DCOR-Aid issue page <https://github.com/DCOR-dev/DCOR-Aid/issues>`_.
 
 
+.. figure:: scrots/access_dcoraid_init.png
+    :target: ../_images/access_dcoraid_init.png
+
+    The search results in the *Find Data* tab can be filtered by
+    circle and collection. The tool buttons allow you to download
+    datasets and resources and to view them online.
+
 
 
 Access via DCOR-Aid Python library
