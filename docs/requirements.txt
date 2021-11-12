@@ -4,6 +4,6 @@ ipython
 matplotlib
 numpy
 scipy
-#sphinx>=1.6.4
+sphinx==4.3.0
 sphinxcontrib.bibtex
-sphinx_rtd_theme
+sphinx_rtd_theme==1.0

@@ -29,7 +29,7 @@ If you are ready to get serious, move on to the production instance.
 Access via DCOR-Aid GUI
 =======================
 It is possible to access all data on DCOR via your browser by visiting
-https://dcor-dev.mpl.mpg.de. However, you might want to consider using
+https://dcor.mpl.mpg.de. However, you might want to consider using
 DCOR-Aid instead, because:
 
 - You can more easily browse circles and collection in the DCOR-Aid GUI.
