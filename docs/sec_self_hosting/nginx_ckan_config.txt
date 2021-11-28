@@ -42,12 +42,12 @@ server {
    }
 
    # extensions that should not be used on a CKAN instance
-   location ~* \.(aspx|gif|html?|php\d?|pl|rar|zip)$ {
+   location ~* \.(aspx|gif|html?|php\d?|pl|rar|sql|tar|tar.gz|zip)$ {
       return 404;
    }
 
    # allow-list for ckan-related directories
-   location ~ ^/(about$|api/[i3]|base|ckan-admin|contact$|dashboard|dataset|favicon.ico$|fonts|group|images|imprint$|login_generic|organization|privacy$|revision|uploads|user|webassets) {
+   location ~ ^/(about$|api/[i3]|base/|ckan-admin|contact$|dashboard|dataset|favicon.ico$|fonts|group|images/.*\.(png|jpg)$|imprint$|login_generic|organization|privacy$|revision|uploads/(admin|group|user)/.+\.(png|jpg|jpeg)$|user|webassets) {
        proxy_pass http://127.0.0.1:8080$request_uri;
        proxy_set_header Host $host;
        proxy_read_timeout 7200;
