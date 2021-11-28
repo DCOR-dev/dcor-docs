@@ -41,8 +41,13 @@ server {
        gzip off;
    }
 
+    # extensions that should not be used on a CKAN instance
+    location ~* \.(aspx|gif|html?|php|pl|rar|zip)$ {
+       return 404;
+    }
+
    # allow-list for ckan-related directories
-   location ~ /(api|ckan-admin|dashboard|dataset|favicon.ico|fonts|group|images|login_generic|organization|revision|user|webassets) {
+   location ~ ^/(about$|api/[i3]|base|ckan-admin|contact$|dashboard|dataset|favicon.ico$|fonts|group|images|imprint$|login_generic|organization|privacy$|revision|uploads|user|webassets) {
        proxy_pass http://127.0.0.1:8080$request_uri;
        proxy_set_header Host $host;
        proxy_read_timeout 7200;
@@ -65,7 +70,7 @@ server {
        proxy_cache_key $host$scheme$proxy_host$request_uri;
    }
 
-   # Deny all access to other directories that bots search
+   # Fallback: Deny all access to other directories that bots search
    # (e.g. "/wp", "/wordpress", "/old", "/.git") which takes
    # load off of the uWSGI workers.
    location / {
