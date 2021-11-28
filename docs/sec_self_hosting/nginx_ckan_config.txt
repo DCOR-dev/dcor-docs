@@ -41,10 +41,10 @@ server {
        gzip off;
    }
 
-    # extensions that should not be used on a CKAN instance
-    location ~* \.(aspx|gif|html?|php|pl|rar|zip)$ {
-       return 404;
-    }
+   # extensions that should not be used on a CKAN instance
+   location ~* \.(aspx|gif|html?|php\d?|pl|rar|zip)$ {
+      return 404;
+   }
 
    # allow-list for ckan-related directories
    location ~ ^/(about$|api/[i3]|base|ckan-admin|contact$|dashboard|dataset|favicon.ico$|fonts|group|images|imprint$|login_generic|organization|privacy$|revision|uploads|user|webassets) {
