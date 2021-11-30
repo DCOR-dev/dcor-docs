@@ -17,7 +17,7 @@ private datasets therein.
 
 
 Circles: Sharing with colleagues
-================================
+--------------------------------
 DCOR circles are used to create, manage and publish datasets.
 A circle comprises one or more users who are part of the same company,
 organization, research group, or laboratory. Every user can create circles
@@ -27,7 +27,7 @@ All members of a circle have access to the private datasets of that circle.
 
 
 Collections: Sharing for collaborators
-======================================
+--------------------------------------
 You can use DCOR collections to create and manage selections of datasets.
 This could be to catalog datasets for a particular project or team, or on a
 particular theme, or as a very simple way to help people find and search
@@ -38,5 +38,24 @@ collection.
 
 
 Datasets: Simple sharing
-========================
+------------------------
 It is also possible to share individual datasets with other users.
+
+
+Publications
+------------
+Please note that circles and collections are not citable in publications,
+because the datasets therein can change. If you would like to cite a
+dataset on DCOR, please read :sec:`sec_cite`.
+
+
+Sharing data via DCOR-Aid
+=========================
+After you have uploaded your datasets via the *Uploads* tab, you can
+add individual datasets to a collection in the *My Data* tab.
+
+.. note::
+
+    The *Sharing* tab is not implemented yet. Please manage members
+    of collections and circles via the
+    `DCOR web interface <https://dcor.mpl.mpg.de>`_.
