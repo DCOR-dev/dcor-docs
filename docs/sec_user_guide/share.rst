@@ -46,7 +46,7 @@ Publications
 ------------
 Please note that circles and collections are not citable in publications,
 because the datasets therein can change. If you would like to cite a
-dataset on DCOR, please read :sec:`sec_cite`.
+dataset on DCOR, please read :ref:`sec_cite`.
 
 
 Sharing data via DCOR-Aid
