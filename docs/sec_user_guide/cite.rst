@@ -7,7 +7,8 @@ Citing data on DCOR
 .. warning::
 
     Do not cite your data using DCOR collection IDs or DCOR circle IDs.
-    The datasets in a circle or collection can change over time.
+    Users may add new datasets to circles/collections or remove
+    datasets from collections. You should always cite the datasets.
 
 If you are using DCOR data for publication purposes, please make sure
 to properly cite the relevant dataset IDs. For instance, if you are
@@ -21,7 +22,7 @@ like this:
 Philipp Rosendahl, Christoph Herold, Paul Müller, Jochen Guck (2020).
 *Real-time deformability cytometry reference data*,
 Deformability Cytometry Open Repository (DCOR)
-URL: https://dcor.mpl.mpg.de/dataset/89bf2177-ffeb-9893-83cc-b619fc2f6663
+https://dcor.mpl.mpg.de/dataset/89bf2177-ffeb-9893-83cc-b619fc2f6663
 
 
 .. note::
