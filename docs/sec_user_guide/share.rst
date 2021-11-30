@@ -56,8 +56,8 @@ If you would like to cite a dataset on DCOR, please read :ref:`sec_cite`.
 
 Sharing data via DCOR-Aid
 =========================
-After you have uploaded your datasets via the *Uploads* tab, you can
-add individual datasets to a collection in the *My Data* tab.
+After you have :ref:`uploaded your datasets <sec_upload>` via the *Uploads* tab,
+you can add individual datasets to a collection in the *My Data* tab.
 
 .. note::
 
