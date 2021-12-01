@@ -22,6 +22,11 @@ server {
    # Uncoment to avoid robots (only on development machines)
    #location = /robots.txt { return 200 "User-agent: *\nDisallow: /\n"; }
 
+   # Block outdated versions of DCOR-Aid.
+   if ($http_user_agent ~* "^DCOR-Aid/(0\.[0-6]\.[0-9]|0\.7\.[0-6])"){
+   return 400 "Client $http_user_agent outdated.";
+   }
+
    # Do not cache downloads of .rtdc data
    location ~ \.(rtdc)$ {
        proxy_pass http://127.0.0.1:8080$request_uri;
