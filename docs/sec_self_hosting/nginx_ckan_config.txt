@@ -23,8 +23,8 @@ server {
    #location = /robots.txt { return 200 "User-agent: *\nDisallow: /\n"; }
 
    # Block outdated versions of DCOR-Aid.
-   if ($http_user_agent ~* "^DCOR-Aid/(0\.[0-6]\.[0-9]|0\.7\.[0-6])"){
-   return 400 "Client $http_user_agent outdated.";
+   if ($http_user_agent ~* "^DCOR-Aid/(0\.[0-6]\.[0-9]|0\.7\.[0-6])") {
+       return 400 "Client $http_user_agent outdated.";
    }
 
    # Do not cache downloads of .rtdc data
@@ -52,8 +52,8 @@ server {
    }
 
    # allow-list for ckan-related directories
-   location ~ ^/(about$|api/[i3]|base/|ckan-admin|contact$|dashboard|dataset|favicon.ico$|fonts|group|images/.*\.(png|jpg)$|imprint$|login_generic|organization|privacy$|revision|uploads/(admin|group|user)/.+\.(png|jpg|jpeg)$|user|webassets) {
-       proxy_pass http://127.0.0.1:8080$request_uri;
+   location ~ ^/(about$|api/[i3]|base/|ckan-admin|contact$|dashboard|dataset|favicon.ico$|fonts|group|images/.*\.(png|jpg)$|imprint$|login_generic|organization|privacy$|revision|uploads/(admin|group|user)/.+\.(png|jpg|jpeg)$|user|webassets|$) {
+       proxy_pass http://127.0.0.1:8080;
        proxy_set_header Host $host;
        proxy_read_timeout 7200;
        proxy_send_timeout 7200;
@@ -64,22 +64,9 @@ server {
        proxy_cache_key $host$scheme$proxy_host$request_uri;
    }
 
-   # ckan root
-   location = / {
-       proxy_pass http://127.0.0.1:8080/;
-       proxy_set_header Host $host;
-       proxy_cache cache;
-       proxy_cache_bypass $cookie_auth_tkt;
-       proxy_no_cache $cookie_auth_tkt;
-       proxy_cache_valid 30m;
-       proxy_cache_key $host$scheme$proxy_host$request_uri;
-   }
-
-   # Fallback: Deny all access to other directories that bots search
-   # (e.g. "/wp", "/wordpress", "/old", "/.git") which takes
-   # load off of the uWSGI workers.
-   location / {
-       return 404;
+   # Forward /UUID shortcut to /dataset/UUID
+   location ~ "^/([a-f0-9\-]{36})$" {
+       return 301 /dataset/$1;
    }
 
 }

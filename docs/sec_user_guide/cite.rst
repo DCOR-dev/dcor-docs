@@ -22,7 +22,7 @@ like this:
 Philipp Rosendahl, Christoph Herold, Paul Müller, Jochen Guck (2020).
 *Real-time deformability cytometry reference data*,
 Deformability Cytometry Open Repository (DCOR)
-https://dcor.mpl.mpg.de/dataset/89bf2177-ffeb-9893-83cc-b619fc2f6663
+https://dcor.mpl.mpg.de/89bf2177-ffeb-9893-83cc-b619fc2f6663
 
 
 .. note::
