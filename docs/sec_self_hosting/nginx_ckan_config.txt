@@ -64,7 +64,7 @@ server {
        proxy_cache_key $host$scheme$proxy_host$request_uri;
    }
 
-   # Forward /UUID shortcut to /dataset/UUID
+   # Redirect /UUID shortcut to /dataset/UUID
    location ~ "^/([a-f0-9\-]{36})$" {
        return 301 /dataset/$1;
    }
