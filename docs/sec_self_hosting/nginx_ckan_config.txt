@@ -1,6 +1,7 @@
 # Note that nginx only caches GET and HEAD (not POST) by default:
 # http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_cache_methods
-proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=cache:30m max_size=250m;
+proxy_cache_path /tmp/nginx_cache levels=1:2 keys_zone=ANONYM:30m max_size=250m;
+proxy_cache_path /tmp/nginx_cache_static levels=1:2 keys_zone=STATIC:30m max_size=250m;
 
 server {
    client_max_body_size 100G;
@@ -13,11 +14,6 @@ server {
 
    ssl_certificate "/etc/ssl/certs/dcor.mpl.mpg.de.cert";
    ssl_certificate_key "/etc/ssl/private/dcor.mpl.mpg.de.key";
-
-   # Enables byte-range support for both cached and uncached responses
-   # from the proxied server regardless of the "Accept-Ranges" field
-   # in these responses. This is important for resuming downloads.
-   proxy_force_ranges on;
 
    # Uncoment to avoid robots (only on development machines)
    #location = /robots.txt { return 200 "User-agent: *\nDisallow: /\n"; }
@@ -40,6 +36,11 @@ server {
        # for caching large downloads (rw-access to www-data).
        # proxy_temp_path /data/tmp/nginx/proxy 1 2;
 
+       # Enables byte-range support for both cached and uncached responses
+       # from the proxied server regardless of the "Accept-Ranges" field
+       # in these responses. This is important for resuming downloads.
+       proxy_force_ranges on;
+
        # Do not keep any files on disk (only temp files above).
        proxy_store off;
        proxy_cache off;
@@ -51,13 +52,34 @@ server {
       return 404;
    }
 
-   # allow-list for ckan-related directories
-   location ~ ^/(about$|api/[i3]|base/|ckan-admin|contact$|dashboard|dataset|favicon.ico$|fonts|group|images/.*\.(png|jpg)$|imprint$|login_generic|organization|privacy$|revision|uploads/(admin|group|user)/.+\.(png|jpg|jpeg)$|user|webassets|$) {
+   # static/fully cached locations
+   location ~ ^/(api/i18n|base/|favicon.ico$|fonts|images/.*\.(png|jpg)$|webassets) {
+       proxy_pass http://127.0.0.1:8080;
+       proxy_set_header Host $host;
+       proxy_buffering on;
+       proxy_cache_key $host$scheme$proxy_host$request_uri;
+       # Use the static cache
+       proxy_cache STATIC;
+       proxy_cache_valid 200 1d;
+       proxy_cache_use_stale error timeout invalid_header updating http_500 http_502 http_503 http_504;
+       # Ignore anything CKAN or uWSGI say they are caching
+       proxy_ignore_headers Expires;
+       proxy_ignore_headers X-Accel-Expires;
+       proxy_ignore_headers Cache-Control;
+       proxy_ignore_headers Set-Cookie;
+       proxy_hide_header X-Accel-Expires;
+       proxy_hide_header Expires;
+       proxy_hide_header Cache-Control;
+       proxy_hide_header Pragma;
+   }
+
+   # allow-list for ckan-related directories (cached if user not logged-in)
+   location ~ ^/(about$|api/3/|ckan-admin|contact$|dashboard|dataset|group|imprint$|login_generic|organization|privacy$|revision|uploads/(admin|group|user)/.+\.(png|jpg|jpeg)$|user|$) {
        proxy_pass http://127.0.0.1:8080;
        proxy_set_header Host $host;
        proxy_read_timeout 7200;
        proxy_send_timeout 7200;
-       proxy_cache cache;
+       proxy_cache ANONYM;
        proxy_cache_bypass $cookie_auth_tkt;
        proxy_no_cache $cookie_auth_tkt;
        proxy_cache_valid 30m;
