@@ -159,7 +159,7 @@ Troubleshooting
   supervisor file `/etc/supervisor/conf.d/ckan-uwsgi.conf` and set this
   `TPMDIR` to something under `/data`::
 
-    environment=HDF5_USE_FILE_LOCKING=FALSE,TMPDIR=/data/tmp/uwsgi
+    environment=SOMEOTHERVAR=FALSE,TMPDIR=/data/tmp/uwsgi
 
 - If downloads of large resources are aborted by the server after a short
   time, this might be because nginx caches the download on the root partition
@@ -189,5 +189,17 @@ Troubleshooting
 
     OSError: error during read(8192) on wsgi.input
 
-  This could mean (if you are storing data on slow storage) that the
-  `send_timeout` in the nginx configuration is not large enough.
+  The you probably have to
+  `disable proxy-buffering <https://stackoverflow.com/a/70335075/11860880>`_
+  in nginx.
+
+
+- If you are getting RuntimeErrors in the CKAN logs on startup::
+
+     RuntimeError: CKAN config option not found: /usr/lib/ckan/default/src/ckan/ckan.ini
+
+  This is not a big problem, but to resolve it, you can add the `CKAN_INI` to
+  the supervisor environment variable in `/etc/supervisor/conf.d/ckan-uwsgi.conf`::
+
+     environment=SOMEVAR=FALSE,CKAN_INI=/etc/ckan/default/ckan.ini
+
