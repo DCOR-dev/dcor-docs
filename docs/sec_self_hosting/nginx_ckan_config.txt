@@ -46,7 +46,7 @@ server {
         gzip off;
     }
 
-    # extensions that should not be used on a CKAN instance
+    # file extensions that should not be used on a CKAN instance
     location ~* \.(aspx|gif|html?|php\d?|pl|rar|sql|tar|tar.gz|zip)$ {
       return 404;
     }
