@@ -3,6 +3,18 @@ Frequently Asked Questions
 ==========================
 
 
+.. _sec_faq_upload_license:
+
+Why do I have to specify a creative commons license when uploading data?
+========================================================================
+This is a choice made by design. For all data that you upload, private or
+public, you must specify a creative commons license. This ensures that
+the data can be used by others in the future. DCOR is a free service
+hosted by an organization serving the public good. If you cannot meet
+those terms, then you still have the option to host your own DCOR instance
+(see :ref:`selfhost`).
+
+
 .. _sec_faq_upload_test:
 
 Can I upload a test dataset somewhere?
