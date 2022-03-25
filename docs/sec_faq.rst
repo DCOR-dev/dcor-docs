@@ -3,6 +3,21 @@ Frequently Asked Questions
 ==========================
 
 
+.. _sec_faq_help:
+
+I need help with something that's not covered here
+==================================================
+
+If you found a bug, have a feature request, or have any other question
+regarding DCOR, please open an issue in the DCOR repository that in your
+opinion best matches your query:
+
+https://github.com/DCOR-dev
+
+If in doubt, please create an issue in the
+`DCOR-help <https://github.com/DCOR-dev/DCOR-help/issues>`__ repositry.
+
+
 .. _sec_faq_upload_license:
 
 Why do I have to specify a creative commons license when uploading data?
