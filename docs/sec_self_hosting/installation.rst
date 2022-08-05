@@ -120,6 +120,9 @@ installation is setup correctly.
 
 Testing
 -------
+If you are setting up a development instance, then you might want to be able
+to run the DCOR tests. This step is not required if you are setting up an
+instance for production.
 For testing, common practice is to create separate test databases. We adapt
 the recipe from the `CKAN docs <https://docs.ckan.org/en/2.9/contributing/test.html>`_
 to test the DCOR extensions (e.g. we don't need datastore).
