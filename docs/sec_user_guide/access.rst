@@ -234,3 +234,25 @@ In this example, we order all resources according to flow rate
   ax.set_xlabel("flow rates [µL/s]")
   ax.set_ylabel("number of datasets")
   plt.show()
+
+
+Downloading data with wget
+==========================
+
+If you would like to download datasets, you can access it using the following URL
+
+.. code::
+
+   wget https://${SERVER}/dataset/${DATASET_ID}/resource/${RESOURCE_ID}/download/${RESOURCE_NAME}
+
+For private datasets, you would have to pass your API token
+
+.. code::
+
+   wget --header="Authorization: ${YOUR_API_KEY}" https://${SERVER}/dataset/${DATASET_ID}/resource/${RESOURCE_ID}/download/${RESOURCE_NAME}
+
+Example:
+
+.. code::
+
+   wget https://dcor.mpl.mpg.de/dataset/89bf2177-ffeb-9893-83cc-b619fc2f6663/resource/fb719fb2-bd9f-817a-7d70-f4002af916f0/download/calibration_beads.rtdc
