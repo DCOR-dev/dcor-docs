@@ -81,3 +81,23 @@ active state, only the following actions are allowed:
 
 1. setting the visibility of a private dataset to public
 2. changing the license of a dataset to a less restrictive one
+
+
+.. _sec_faq_dataset_not_deletable:
+
+Why can't I delete datasets or resources?
+=========================================
+Here, the same arguments about :ref:`prohibiting the addition of resources
+to active datasets <sec_faq_dataset_not_editable>` apply. Scientific data
+that once have been made available to the public should not be taken down again.
+
+There are exceptions, for instance:
+
+- The data are from a blood measurement of a patient at a hospital. The patient
+  never gave consent for his/her data being made publicly available or the
+  patient revoked a corresponding license.
+- You have uploaded a dataset that contains sensitive patient data that could
+  possibly be used to deanonymize the patient.
+
+In such cases, it is possible to delete entire datasets. However, this procedure
+requires you to make a clear statement and proviee proof for your claims.
