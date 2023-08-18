@@ -266,4 +266,8 @@ email notifications and automated reboots.
 
    Note that this is something different than CKAN email notifications.
 
+In order for unattended upgrades to work properly: whenever updates are
+installed, make sure that `needrestart` automatically restarts the services
+by editing the file `/etc/needrestart/needrestart.conf` and setting::
 
+    $nrconf{restart} = 'a';
