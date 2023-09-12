@@ -133,7 +133,8 @@ Troubleshooting
 
     SystemMaxUse=200M
 
-  It might also help to remove-purge the `snapd` package::
+  It might also help to remove-purge the `snapd` package (Don't do this if
+  you are using snaps, e.g. for `certbot <https://certbot.eff.org/>`_!)::
 
     apt purge snapd
     rm -rf /snap
