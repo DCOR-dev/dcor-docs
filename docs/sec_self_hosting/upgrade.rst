@@ -78,6 +78,8 @@ steps to upgrade CKAN from the `CKAN docs
    (CKAN 2.10 only supports solr 8.x).
    Note that solr by default listens to tcp6 (IPv6). Thus, any setting in the
    ckan.ini file that uses `127.0.0.1` will not work - use `localhost` instead.
+   To test solr, make sure that the following URL returns JSON data:
+   http://localhost:8983/solr/ckan/select/?q=*:*&rows=1&wt=json
 
 9. Install DCOR (either via `pip` or as described in
    the :ref:`development section <sec_dev_install>`)::
