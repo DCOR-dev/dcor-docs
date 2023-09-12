@@ -54,11 +54,12 @@ steps to upgrade CKAN from the `CKAN docs
 
    Install the latest version of CKAN for your system::
 
-     CKANMINOR=2.9
-     CKANPATCH=2.9.5
+     CKANMINOR=2.10
+     CKANPATCH=2.10.1
      UBUNTURELEASE=$(lsb_release -cs)
-     DLNAMESERVR=python-ckan_${CKANMINOR}-py3-${UBUNTURELEASE}_amd64.deb
-     DLNAMELOCAL=python-ckan_${CKANPATCH}-py3-${UBUNTURELEASE}_amd64.deb
+     DLNAMESERVR=python-ckan_${CKANMINOR}-${UBUNTURELEASE}_amd64.deb
+     DLNAMELOCAL=python-ckan_${CKANPATCH}-${UBUNTURELEASE}_amd64.deb
+     mkdir -p CKAN_updates
      wget https://packaging.ckan.org/${DLNAMESERVR} -O CKAN_updates/${DLNAMELOCAL}
      dpkg -i CKAN_updates/${DLNAMELOCAL}
 
@@ -68,21 +69,34 @@ steps to upgrade CKAN from the `CKAN docs
      source /usr/lib/ckan/default/bin/activate
      export CKAN_INI=/etc/ckan/default/ckan.ini
 
-8. Install DCOR (either via `pip` or as described in
+8. Reinstall Solr. If already installed via apt, this will require you to first::
+
+     apt purge tomcat9 solr-tomcat
+
+   Then, install solr manually as described in
+   https://docs.ckan.org/en/2.10/maintaining/installing/solr.html?highlight=solr#installing-solr-manually
+   (CKAN 2.10 only supports solr 8.x).
+   Note that solr by default listens to tcp6 (IPv6). Thus, any setting in the
+   ckan.ini file that uses `127.0.0.1` will not work - use `localhost` instead.
+
+9. Install DCOR (either via `pip` or as described in
    the :ref:`development section <sec_dev_install>`)::
 
      # might be necessary if pip is still broken
      wget https://gitlab.gwdg.de/pmuelle3/ckan-release-mirror/-/raw/main/get-pip.py?inline=false -O CKAN_updates/get-pip.py
+     # Make sure there is no conflict between setuptools and distutils
+     # (https://github.com/pypa/setuptools/issues/2993#issuecomment-1003765389)
+     export SETUPTOOLS_USE_DISTUTILS=stdlib
      python CKAN_updates/get-pip.py
      pip install --upgrade pip wheel
      pip install --upgrade --force-reinstall dcor_control
 
-9. Make sure the configuration is intact (you may skip scanning for orphaned files)::
+10. Make sure the configuration is intact (you may skip scanning for orphaned files)::
 
      ckan dcor-theme-main-css-branding  # might not be necessary
      dcor inspect
 
-10. Finally start nginx and supervisor::
+11. Finally start nginx and supervisor::
 
      systemctl start nginx
      systemctl start supervisor
