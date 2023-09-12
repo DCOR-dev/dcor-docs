@@ -73,7 +73,8 @@ steps to upgrade CKAN from the `CKAN docs
 
      apt purge tomcat9 solr-tomcat
 
-   Then, install solr manually as described in
+   Then, install solr manually as described in (installing ``openjdk-8-jdk-headless``
+   is sufficient, you don't have to install ``openjdk-8-jdk``).
    https://docs.ckan.org/en/2.10/maintaining/installing/solr.html?highlight=solr#installing-solr-manually
    (CKAN 2.10 only supports solr 8.x).
    Note that solr by default listens to tcp6 (IPv6). Thus, any setting in the
