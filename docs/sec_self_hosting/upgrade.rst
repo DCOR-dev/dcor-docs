@@ -99,7 +99,11 @@ steps to upgrade CKAN from the `CKAN docs
      ckan dcor-theme-main-css-branding  # might not be necessary
      dcor inspect
 
-11. Finally start nginx and supervisor::
+11. If the CKAN upgrade requires a database upgrade (see CKAN changelog)::
+
+     ckan db upgrade
+
+12. Finally start nginx and supervisor::
 
      systemctl start nginx
      systemctl start supervisor
