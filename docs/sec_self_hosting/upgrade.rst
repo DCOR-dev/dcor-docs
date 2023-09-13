@@ -103,7 +103,12 @@ steps to upgrade CKAN from the `CKAN docs
 
      ckan db upgrade
 
-12. Finally start nginx and supervisor::
+12. Rerun rebranding scripts::
+
+     ckan dcor-theme-main-css-branding
+     ckan dcor-theme-i18n-branding
+
+13. Finally start nginx and supervisor::
 
      systemctl start nginx
      systemctl start supervisor
