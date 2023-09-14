@@ -96,7 +96,6 @@ steps to upgrade CKAN from the `CKAN docs
 
 10. Make sure the configuration is intact (you may skip scanning for orphaned files)::
 
-     ckan dcor-theme-main-css-branding  # might not be necessary
      dcor inspect
 
 11. If the CKAN upgrade requires a database upgrade (see CKAN changelog)::
