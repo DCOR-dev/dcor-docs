@@ -101,6 +101,7 @@ steps to upgrade CKAN from the `CKAN docs
 11. If the CKAN upgrade requires a database upgrade (see CKAN changelog)::
 
      ckan db upgrade
+     ckan search-index rebuild
 
 12. Rerun rebranding scripts::
 
