@@ -204,3 +204,27 @@ Troubleshooting
 
      environment=SOMEVAR=FALSE,CKAN_INI=/etc/ckan/default/ckan.ini
 
+
+- If on CKAN>=2.10.1 you are getting errors about not being able to connect
+  to SOLR on startup, such as::
+
+    requests.exceptions.ConnectionError: HTTPConnectionPool(host='localhost', port=8983): Max retries exceeded
+      with url: /solr/ckan/select/?q=%2A%3A%2A&rows=1&wt=json (Caused by NewConnectionError(
+      '<urllib3.connection.HTTPConnection object at 0x7f18ec3f4310>: Failed to establish a new connection:
+      [Errno 111] Connection refused'))
+    2023-09-19 18:24:48,312 WARNI [ckan.lib.search] Problems were found while connecting to the SOLR server
+    pysolr.SolrError: Failed to connect to server at http://localhost:8983/solr/ckan/select/?q=%2A%3A%2A&rows=1&wt=json:
+      HTTPConnectionPool(host='localhost', port=8983): Max retries exceeded with url:
+      /solr/ckan/select/?q=%2A%3A%2A&rows=1&wt=json (Caused by NewConnectionError('<urllib3.connection.HTTPConnection
+      object at 0x7f18ec3f4310>: Failed to establish a new connection: [Errno 111] Connection refused'))
+
+  This means that supervisor is starting before SOLR (or at the same time).
+  The solution is to create a edit the supervisor systemd unit via::
+
+    systemctl edit supervisor
+
+  and add the SOLR depenendency like so::
+
+    [Unit]
+    Requires=solr.service
+    After=solr.service
