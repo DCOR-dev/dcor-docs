@@ -61,6 +61,8 @@ steps to upgrade CKAN from the `CKAN docs
      DLNAMELOCAL=python-ckan_${CKANPATCH}-${UBUNTURELEASE}_amd64.deb
      mkdir -p CKAN_updates
      wget https://packaging.ckan.org/${DLNAMESERVR} -O CKAN_updates/${DLNAMELOCAL}
+     apt remove python-ckan
+     rm -rf /usr/lib/ckan/
      dpkg -i CKAN_updates/${DLNAMELOCAL}
 
 7. Reactivate the environment::
