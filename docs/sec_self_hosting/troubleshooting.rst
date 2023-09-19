@@ -219,7 +219,7 @@ Troubleshooting
       object at 0x7f18ec3f4310>: Failed to establish a new connection: [Errno 111] Connection refused'))
 
   This means that supervisor is starting before SOLR (or at the same time).
-  The solution is to create a edit the supervisor systemd unit via::
+  The solution is to edit the supervisor systemd unit via::
 
     systemctl edit supervisor
 
