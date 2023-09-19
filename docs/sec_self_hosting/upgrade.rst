@@ -103,6 +103,8 @@ steps to upgrade CKAN from the `CKAN docs
 11. If the CKAN upgrade requires a database upgrade (see CKAN changelog)::
 
      ckan db upgrade
+     # This will take some time. For installations with many datasets, consider
+     # running it in a screen session:
      ckan search-index rebuild
 
 12. Rerun rebranding scripts::
