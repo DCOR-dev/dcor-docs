@@ -123,48 +123,11 @@ Testing
 If you are setting up a development instance, then you might want to be able
 to run the DCOR tests. This step is not required if you are setting up an
 instance for production.
-For testing, common practice is to create separate test databases. We adapt
-the recipe from the `CKAN docs <https://docs.ckan.org/en/2.9/contributing/test.html>`_
-to test the DCOR extensions (e.g. we don't need datastore).
 
-- Activate the virtual environment::
-
-   source /usr/lib/ckan/default/bin/activate
-
-- Install the requirements::
-
-   pip install -r /usr/lib/ckan/default/src/ckan/dev-requirements.txt
-   # https://github.com/ckan/ckan/issues/5570
-   pip install pytest-ckan
-
-- Create the test database::
-
-   sudo -u postgres createdb -O ckan_default ckan_test -E utf-8
-
-- Create ckan.ini for testing::
-
-   cp /etc/ckan/default/ckan.ini /etc/ckan/default/test-dcor.ini
-
-  Modify test-dcor.ini::
-
-    #sqlalchemy.url = postgresql://ckan_default:passw@localhost/ckan_default
-    sqlalchemy.url = postgresql://ckan_default:passw@localhost/ckan_test
-
-    #solr_url=http://127.0.0.1:8983/solr
-    solr_url=http://127.0.0.1:8983/solr/ckan
-
-- Configure `Solr Multi-core <https://docs.ckan.org/en/2.9/contributing/test.html?highlight=testing#configure-solr-multi-core>`_.
-
-- Initialize the testing db::
-
-    export CKAN_INI=/etc/ckan/default/test-dcor.ini
-    ckan db init
-
-You can then run the tests with e.g.::
-
-  export CKAN_INI=/etc/ckan/default/test-dcor.ini
-  pytest /path/to/ckanext-dcor_depot
-
+For testing purposes, you can use the `DCOR vagrant box
+<https://app.vagrantup.com/paulmueller/boxes/dcor-test>`_. It contains
+a full install of DCOR (including SOLR and object storage) and is updated
+regularly.
 
 SSL
 ===
