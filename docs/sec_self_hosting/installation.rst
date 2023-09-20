@@ -67,6 +67,51 @@ please create this directory with
    mkdir /data
 
 
+.. _selfhost_object_storage:
+
+Object Storage
+==============
+You should use a cloud storage provider that you trust instead of setting this
+up yourself. If you know what you are doing (e.g. for testing) and would like
+to setup S3-compatible object storage yourself, you can use `MinIO
+<https://min.io/download#/linux>`_. On a Ubuntu/Debian machine, install
+the latest MinIO server like so::
+
+    wget https://dl.min.io/server/minio/release/linux-amd64/minio_RELEASEDATE.0.0_amd64.deb
+    dpkg -i minio_RELEASEDATE.0.0_amd64.deb
+
+This also installed the ``minio`` systemd service which we want to use.
+First, make sure that the user defined in the service::
+
+    systemctl show minio | grep USER=
+
+actually exists. You can add a system user via::
+
+    useradd -r minio-user
+
+Then, create a file ``/etc/defaul/minio`` with the following content::
+
+    # Volume to be used for MinIO server (make sure minio-user has access).
+    MINIO_VOLUMES="/srv/minio"
+    # Use if you want to run MinIO on a custom port (console is the web interface).
+    MINIO_OPTS="--address :9000 --console-address :9001"
+    # Root user for the server.
+    MINIO_ROOT_USER=minio-vagrant
+    # Root secret for the server.
+    MINIO_ROOT_PASSWORD=minio-vagrant
+    # set this for MinIO to reload entries with 'mc admin service restart'
+    MINIO_CONFIG_ENV_FILE=/etc/default/minio
+
+Now you can enable and start the minio service::
+
+    systemctl enable minio
+    systemctl start minio
+
+Create a "dcor" user and create an access token (read/write) which you can
+then copy-paste to the ``ckan.ini`` configuration::
+
+    dcor_object_store.access_key_id = access-key-id
+    dcor_object_store.secret_access_key = secret-access-key
 
 .. _selfhost_dcorext:
 
