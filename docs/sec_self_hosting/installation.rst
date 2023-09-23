@@ -83,7 +83,7 @@ the latest MinIO server like so::
 This also installed the ``minio`` systemd service which we want to use.
 First, make sure that the user defined in the service::
 
-    systemctl show minio | grep USER=
+    systemctl show minio | grep User=
 
 actually exists. You can add a system user via::
 
@@ -96,9 +96,9 @@ Then, create a file ``/etc/defaul/minio`` with the following content::
     # Use if you want to run MinIO on a custom port (console is the web interface).
     MINIO_OPTS="--address :9000 --console-address :9001"
     # Root user for the server.
-    MINIO_ROOT_USER=minio-vagrant
+    MINIO_ROOT_USER=minio-root-user-account-name
     # Root secret for the server.
-    MINIO_ROOT_PASSWORD=minio-vagrant
+    MINIO_ROOT_PASSWORD=secret-password-for-minio-root-user
     # set this for MinIO to reload entries with 'mc admin service restart'
     MINIO_CONFIG_ENV_FILE=/etc/default/minio
 
@@ -107,8 +107,9 @@ Now you can enable and start the minio service::
     systemctl enable minio
     systemctl start minio
 
-Create a "dcor" user and create an access token (read/write) which you can
-then copy-paste to the ``ckan.ini`` configuration::
+Create a "dcor" user (``http://minio.server.name:9001/identity/users/add-user``)
+with `readwrite` permissions and create an access key (via "Service Accounts")
+which you can then copy-paste to the ``ckan.ini`` configuration::
 
     dcor_object_store.access_key_id = access-key-id
     dcor_object_store.secret_access_key = secret-access-key
