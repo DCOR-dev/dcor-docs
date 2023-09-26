@@ -280,3 +280,23 @@ installed, make sure that `needrestart` automatically restarts the services
 by editing the file `/etc/needrestart/needrestart.conf` and setting::
 
     $nrconf{restart} = 'a';
+
+
+Systemd
+=======
+It is important that all services required for CKAN to run should be started
+before starting ``supervisor``. This can be achieved by running
+``systemctl edit supervisor`` and pasting the following config::
+
+    [Unit]
+    Requires=solr.service
+    After=solr.service
+    Requires=redis.service
+    After=redis.service
+    Requires=postgresql.service
+    After=postgresql.service
+
+If `solr` is slow when starting up, add this to its unit file ``systemctl edit solr``::
+
+    [Service]
+    ExecStartPost=/bin/sleep 250
