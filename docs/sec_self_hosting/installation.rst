@@ -300,3 +300,5 @@ If `solr` is slow when starting up, add this to its unit file ``systemctl edit s
 
     [Service]
     ExecStartPost=/bin/sleep 250
+    Restart=on-failure
+    RestartSec=10s
