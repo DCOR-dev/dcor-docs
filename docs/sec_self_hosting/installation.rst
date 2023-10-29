@@ -282,6 +282,13 @@ by editing the file `/etc/needrestart/needrestart.conf` and setting::
     $nrconf{restart} = 'a';
 
 
+Supervisor
+==========
+Sometimes the ckan-uwsgi start job might take a little longer and the default
+(1s) is not long enough so supervisor becomes impatient. Edit the file
+``/etc/supervisor/conf.d/ckan-uwsgi.conf`` and add ``startsecs=60``.
+
+
 Systemd
 =======
 It is important that all services required for CKAN to run should be started
