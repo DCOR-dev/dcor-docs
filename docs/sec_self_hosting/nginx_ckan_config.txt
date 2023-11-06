@@ -22,6 +22,11 @@ server {
        return 400 "Client $http_user_agent outdated.";
     }
 
+    # Avoid spamming the logs by these frequent invalid requests
+    location ~ ^(/user/reset|/userportal|/user\.action) {
+        deny all;
+    }
+
     # Do not cache downloads of .rtdc data
     location ~ \.(rtdc)$ {
         proxy_pass http://127.0.0.1:8080$request_uri;
@@ -103,8 +108,22 @@ server {
         proxy_set_header Connection "";
     }
 
-    # allow-list for ckan-related directories (cached if user not logged-in)
-    location ~ ^/(about$|api/2/util/|api/3/|ckan-admin|contact$|dashboard|dataset|group|imprint$|login_generic|organization|privacy$|revision|uploads/(admin|group|user)/.+\.(png|jpg|jpeg)$|user|$) {
+    # GET allow-list for ckan-related directories (cached if user not logged-in)
+    location ~ ^/($|about$|contact$|dashboard|dataset|group|imprint$|organization|privacy$|revision) {
+        limit_except GET {
+              deny all;
+            }
+        proxy_pass http://127.0.0.1:8080;
+        proxy_set_header Host $host;
+        proxy_cache ANONYM;
+        proxy_cache_bypass $cookie_auth_tkt;
+        proxy_no_cache $cookie_auth_tkt;
+        proxy_cache_valid 30m;
+        proxy_cache_key $host$scheme$proxy_host$request_uri;
+    }
+
+    # GET/POST allow-list for ckan-related directories (cached if user not logged-in)
+    location ~ ^/(api/2/util/|api/3/|ckan-admin|login_generic|uploads/(admin|group|user)/.+\.(png|jpg|jpeg)$|user) {
         proxy_pass http://127.0.0.1:8080;
         proxy_set_header Host $host;
         proxy_cache ANONYM;
