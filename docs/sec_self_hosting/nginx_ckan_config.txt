@@ -109,7 +109,7 @@ server {
     }
 
     # GET allow-list for ckan-related directories (cached if user not logged-in)
-    location ~ ^/($|about$|contact$|dashboard|dataset|group|imprint$|organization|privacy$|revision) {
+    location ~ ^/($|about$|contact$|dashboard|dataset|imprint$|privacy$|revision) {
         limit_except GET {
               deny all;
             }
@@ -123,7 +123,7 @@ server {
     }
 
     # GET/POST allow-list for ckan-related directories (cached if user not logged-in)
-    location ~ ^/(api/2/util/|api/3/|ckan-admin|login_generic|uploads/(admin|group|user)/.+\.(png|jpg|jpeg)$|user) {
+    location ~ ^/(api/2/util/|api/3/|ckan-admin|group|login_generic|organization|uploads/(admin|group|user)/.+\.(png|jpg|jpeg)$|user) {
         proxy_pass http://127.0.0.1:8080;
         proxy_set_header Host $host;
         proxy_cache ANONYM;
