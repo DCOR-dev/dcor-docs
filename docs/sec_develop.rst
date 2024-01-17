@@ -26,73 +26,22 @@ Installation
 This part differs from the installation for production. We want to have the
 DCOR extensions installed in editable mode. 
 
+Let's first set up our development environment. The ``dcor_control``
+package comes with a convenient ``dcor develop`` command. This command
+will create the ``/dcor-repos`` directory, clone all DCOR-related
+repositories into it and install each of them in editable mode.
+
 .. note::
 
-    If you are installing DCOR in a virtual machine, it makes sense to
-    access the extensions directories directly from the host system.
-    (without having to git or rsync data back and forth).
-
-    On the host machine, create a directory where all relevant repositories
-    will be cloned to (e.g. ``/home/paul/repos/DCOR``).
-
-
-    In Virtual Machine Manager, add a "Filesystem" hardware. Choose "Path" driver,
-    "Passthrough" mode, "Default" write policy and set the source path to where
-    the repositories are located on the host machine (``/home/paul/repos/DCOR``).
-    Set the target path to "/repos".
-    
-    On the guest machine, add the following line to `/etc/fstab`:
-    
-    .. code::
-    
-       /repos   /dcor-repos    9p  trans=virtio,version=9p2000.L,rw    0   0
-    
-    After ``mkdir /dcor-repos``, ``chmod a+rx /dcor-repos``,
-    and ``mount /dcor-repos``, you can then access
-    the repositories of the host machine directly from the guest machine.
-    In order for everything to work properly, libvirt needs access to
-    ``/home/paul/repos/DCOR``. The easiest way to achieve that
-    is to set the libvirt user to your user name, i.e. edit ``/etc/libvirt/qemu.conf``
-    and set ``user = "paul"`` (``systemctl restart libvirtd`` after doing so).
-
-
-Let's first choose a directory where all DCOR-related repositories will be
-located (e.g. `/dcor-repos`). Clone all relevant directories. If you are
-forking any of these repositories, you will wnat to run
-`git clone git@github.com:username/repository_name.git`` instead.
+    If you have already installed all packages in editable mode from
+    GitHub repositories, a simple `dcor update` will only update those
+    (regardless of where they are located in the file system).
 
 .. code::
 
-   mkdir -p /dcor-repos
-   cd /dcor-repos
-   git clone https://github.com/DCOR-dev/dcor_control.git
-   git clone https://github.com/DCOR-dev/dcor_shared.git
-   git clone https://github.com/DCOR-dev/ckanext-dc_log_view.git
-   git clone https://github.com/DCOR-dev/ckanext-dc_serve.git
-   git clone https://github.com/DCOR-dev/ckanext-dc_view.git
-   git clone https://github.com/DCOR-dev/ckanext-dcor_depot.git
-   git clone https://github.com/DCOR-dev/ckanext-dcor_schemas.git
-   git clone https://github.com/DCOR-dev/ckanext-dcor_theme.git
-
-Next, install each of those repositories in the CKAN virtual environment
-(in the exact same order).
-
-.. code::
-
-    source /usr/lib/ckan/default/bin/activate
-    cd /dcor-repos
-    pip install --upgrade pip wheel
-    # shared extension dependency
-    pip install -e dcor_shared
-    # extensions
-    pip install -e ckanext-dc_log_view
-    pip install -e ckanext-dc_serve
-    pip install -e ckanext-dc_view
-    pip install -e ckanext-dcor_depot
-    pip install -e ckanext-dcor_schemas
-    pip install -e ckanext-dcor_theme
-    # dcor control (this must be installed at the very end)
-    pip install -e dcor_control
+   source /usr/lib/ckan/default/bin/activate
+   pip install dcor_control
+   dcor develop
 
 
 Initialization

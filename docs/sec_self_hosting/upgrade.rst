@@ -55,13 +55,13 @@ steps to upgrade CKAN from the `CKAN docs
    Install the latest version of CKAN for your system::
 
      CKANMINOR=2.10
-     CKANPATCH=2.10.1
+     CKANPATCH=2.10.3
      UBUNTURELEASE=$(lsb_release -cs)
      DLNAMESERVR=python-ckan_${CKANMINOR}-${UBUNTURELEASE}_amd64.deb
      DLNAMELOCAL=python-ckan_${CKANPATCH}-${UBUNTURELEASE}_amd64.deb
      mkdir -p CKAN_updates
      wget https://packaging.ckan.org/${DLNAMESERVR} -O CKAN_updates/${DLNAMELOCAL}
-     apt remove python-ckan
+     apt-get -y remove python-ckan
      rm -rf /usr/lib/ckan/
      dpkg -i CKAN_updates/${DLNAMELOCAL}
 
@@ -71,7 +71,8 @@ steps to upgrade CKAN from the `CKAN docs
      source /usr/lib/ckan/default/bin/activate
      export CKAN_INI=/etc/ckan/default/ckan.ini
 
-8. Reinstall Solr. If already installed via apt, this will require you to first::
+8. For the upgrade from CKAN 2.0 to 2.10, Solr must be installed (previous versions of Solr were
+   installed via ``apt``)::
 
      apt purge tomcat9 solr-tomcat
 
