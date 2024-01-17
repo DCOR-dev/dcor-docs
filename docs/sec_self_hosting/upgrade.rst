@@ -97,21 +97,21 @@ steps to upgrade CKAN from the `CKAN docs
      pip install --upgrade pip wheel
      pip install --upgrade --force-reinstall dcor_control
 
-10. Make sure the configuration is intact (you may skip scanning for orphaned files)::
+10. Rerun rebranding scripts::
+
+     ckan dcor-theme-main-css-branding
+     ckan dcor-theme-i18n-branding
+
+11. Make sure the configuration is intact (you may skip scanning for orphaned files)::
 
      dcor inspect
 
-11. If the CKAN upgrade requires a database upgrade (see CKAN changelog)::
+12. If the CKAN upgrade requires a database upgrade (see CKAN changelog)::
 
      ckan db upgrade
      # This will take some time. For installations with many datasets, consider
      # running it in a screen session:
      ckan search-index rebuild
-
-12. Rerun rebranding scripts::
-
-     ckan dcor-theme-main-css-branding
-     ckan dcor-theme-i18n-branding
 
 13. Finally start nginx and supervisor::
 
