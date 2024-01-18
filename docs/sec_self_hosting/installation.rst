@@ -303,7 +303,7 @@ before starting ``supervisor``. This can be achieved by running
     Requires=postgresql.service
     After=postgresql.service
 
-    [Install]
+    [Service]
     Restart=always
     RestartSec=20
 
