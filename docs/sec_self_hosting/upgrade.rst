@@ -99,6 +99,7 @@ steps to upgrade CKAN from the `CKAN docs
 
 10. Rerun rebranding scripts::
 
+     sed -i 's/ckan.locale_default=en_US/ckan.locale_default=en_GB/g' /etc/ckan/default/ckan.ini
      ckan dcor-theme-main-css-branding
      ckan dcor-theme-i18n-branding
 
