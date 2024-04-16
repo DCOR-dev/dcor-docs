@@ -69,6 +69,16 @@ please create this directory with
 
 .. _selfhost_object_storage:
 
+
+Scratch Space
+=============
+It is important that you have some scratch space of at least 100 GB available
+on you system, so that the `ckanext-dc_serve` extension can create temporary
+condensed datasets before uploading them to S3. By default, the cache is
+located at `/data/tmp/ckanext-dc_serve` and is editable via the configuration
+option `ckanext.dc_serve.tmp_dir`.
+
+
 Object Storage
 ==============
 You should use a cloud storage provider that you trust instead of setting this
