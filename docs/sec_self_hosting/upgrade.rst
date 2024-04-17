@@ -55,7 +55,7 @@ steps to upgrade CKAN from the `CKAN docs
    Install the latest version of CKAN for your system::
 
      CKANMINOR=2.10
-     CKANPATCH=2.10.3
+     CKANPATCH=2.10.4
      UBUNTURELEASE=$(lsb_release -cs)
      DLNAMESERVR=python-ckan_${CKANMINOR}-${UBUNTURELEASE}_amd64.deb
      DLNAMELOCAL=python-ckan_${CKANPATCH}-${UBUNTURELEASE}_amd64.deb
