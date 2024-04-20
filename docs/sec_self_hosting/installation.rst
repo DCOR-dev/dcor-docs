@@ -156,6 +156,19 @@ requirements.
     pip install dcor_control
 
 
+.. _selfhost_dcorext_worker:
+
+Background workers
+------------------
+DCOR comes with three job queues `dcor-short`, `dcor-normal`, and `dcor-long`
+for data processing after a resource is added to a dataset. The CKAN instance
+populates those queues and CKAN workers (e.g. via `ckan jobs worker dcor-short`)
+fetching and running the jobs in the background. The workers are run, like
+ckan itself, via `supervisor` and are defined via individual configuration
+files in `/etc/supervisor/conf.d`. When you run `dcor inspect` (see next
+section), these files will be created with your approval.
+
+
 .. _selfhost_dcorext_init:
 
 Initialization
