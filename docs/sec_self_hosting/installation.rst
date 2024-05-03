@@ -212,11 +212,15 @@ Creating an SSL certificate (Intranet only)
 -------------------------------------------
 Start by creating your certificate (valid for 10 years)::
 
-  openssl req -newkey rsa:4096 -x509 -sha256 -days 3650 -nodes -out fqdn.cert -keyout fqdn.key
+  openssl req -newkey rsa:4096 -x509 -config openssl-csr-config.txt -days 3650 -nodes -out dcor-example-com.crt -keyout dcor-example-com.key
 
-where `fqdn` is your fully qualified domain name (FQDN) which maps to the
-server's IP address. Make sure to enter it in the dialog (otherwise use
-the IP address). This makes connection tests easier (e.g. if you only have
+using this `openssl-csr-config.txt` file:
+
+.. literalinclude:: openssl-csr-config.txt
+   :language: ini
+
+where `dcor.example.com` is your fully qualified domain name (FQDN) which maps to the
+server's IP address. Using the FQDN makes connection tests easier (e.g. if you only have
 SSH access to the machine and need to use SSH tunneling to connect to the
 CKAN instance by mapping its FQDN in the `/etc/hosts` file to `127.0.0.1`
 on the testing client).

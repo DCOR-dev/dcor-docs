@@ -34,9 +34,9 @@ Steps to create an access token:
      ckan user add your_username
      # obtain the API key (if this does not work, you have to login
      # as that user and create an api key)
-     ckan user show your_username | grep apikey
+     ckan user token add user_name token_name
      # write the API key to a text file
-     echo 7c0c7203-4e25-4b14-a118-553c496a7a52 > api_key.txt
+     echo eyJ0eXAiOiJKV1QiLC...y5WqA5pCE > api_key.txt
      # copy the public SSL certificate to the current directory
      cp /etc/ssl/certs/fqdn.cert ./server.cert
      # creat the encrypted access token (use a good encryption passoword)

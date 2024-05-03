@@ -1,0 +1,20 @@
+[ req ]
+default_md = sha256
+prompt = no
+x509_extensions = req_ext
+distinguished_name = req_distinguished_name
+
+[ req_distinguished_name ]
+commonName = dcor.example.com
+countryName = DE
+stateOrProvinceName = Bavaria
+localityName = Erlangen
+organizationName = DCOR-med
+
+[ req_ext ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+IP.0 = 10.5.4.3
+DNS.0 = dcor.example.com
+email.0 = email@dcor.example.com
