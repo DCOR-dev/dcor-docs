@@ -31,8 +31,8 @@ Install CKAN:
 
 .. code::
 
-   wget https://packaging.ckan.org/python-ckan_2.9-py3-focal_amd64.deb
-   dpkg -i python-ckan_2.9-py3-focal_amd64.deb
+   wget https://packaging.ckan.org/python-ckan_{LATEST-VERSION}-py3-{UBUNTU_RELEASE}_amd64.deb
+   dpkg -i python-ckan_..._amd64.deb
 
 
 .. note::
@@ -87,8 +87,8 @@ to setup S3-compatible object storage yourself, you can use `MinIO
 <https://min.io/download#/linux>`_. On a Ubuntu/Debian machine, install
 the latest MinIO server like so::
 
-    wget https://dl.min.io/server/minio/release/linux-amd64/minio_RELEASEDATE.0.0_amd64.deb
-    dpkg -i minio_RELEASEDATE.0.0_amd64.deb
+    wget https://dl.min.io/server/minio/release/linux-amd64/minio.deb
+    dpkg -i minio.deb
 
 This also installed the ``minio`` systemd service which we want to use.
 First, make sure that the user defined in the service::
@@ -259,7 +259,7 @@ First copy the certificate to ``/etc/ssl/private``::
 Then, edit ``/etc/nginx/sites-enabled/ckan`` and replace its content with
 the following (change ``dcor.mpl.mpg.de`` to whatever domain you use):
 
-.. literalinclude:: nginx_ckan_config.txt
+.. literalinclude:: nginx_ckan_config.conf
    :language: nginx
 
 Now, we need to modify the CKAN uWSGI file at
