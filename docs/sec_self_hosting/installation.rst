@@ -2,7 +2,7 @@
 Installation
 ============
 
-This section describes how to setup your own DCOR production instance.
+This section describes how to setup your own DCOR instance.
 
 
 .. _selfhost_ubuntuckan:
