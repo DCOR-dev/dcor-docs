@@ -320,26 +320,16 @@ Systemd
 =======
 It is important that all services required for CKAN to run should be started
 before starting ``supervisor``. This can be achieved by running
-``systemctl edit supervisor`` and pasting the following config::
+``systemctl edit supervisor`` and pasting the following config:
 
-    [Unit]
-    Requires=solr.service
-    After=solr.service
-    Requires=redis.service
-    After=redis.service
-    Requires=postgresql.service
-    After=postgresql.service
+.. literalinclude:: systemd_supervisord.ini
+   :language: ini
 
-    [Service]
-    Restart=always
-    RestartSec=20
 
-If `solr` is slow when starting up, add this to its unit file ``systemctl edit solr``::
+If `solr` is slow when starting up, add this to its unit file ``systemctl edit solr``:
 
-    [Service]
-    ExecStartPost=/bin/sleep 250
-    Restart=on-failure
-    RestartSec=10s
+.. literalinclude:: systemd_solr.ini
+   :language: ini
 
 
 Afterwards run::
