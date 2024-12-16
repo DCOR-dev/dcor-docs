@@ -18,6 +18,7 @@ Documentation
    sec_faq
    sec_self_hosting/index
    sec_develop
+   sec_code_signing.rst
 
 
 Indices and tables
