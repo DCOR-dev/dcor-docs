@@ -20,7 +20,7 @@ via GitHub Team roles:
 - There is no special role for *Commiters*. External contributors or members
   of the *Triage* team must create a pull request which is reviewed by a
   *Core* team member.
-- Furthermore, we enforce 2FA for every member of the AFM-Analysis GitHub
+- Furthermore, we enforce 2FA for every member of the DCOR-dev GitHub
   organization.
 
 
