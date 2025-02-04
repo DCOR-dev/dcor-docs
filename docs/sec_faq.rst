@@ -18,6 +18,32 @@ If in doubt, please create an issue in the
 `DCOR-help <https://github.com/DCOR-dev/DCOR-help/issues>`__ repositry.
 
 
+.. _sec_faq_api_token:
+
+What is an API token and where do I find mine?
+==============================================
+Whenever you would like to access DCOR via a software such as DCOR-Aid
+or a custom script, you need an API token (formerly known as API key).
+If you selected the "Playground" option in DCOR-Aid, an API token is
+automatically generated for you and stored by DCOR-Aid. If you are
+using another DCOR instance, you have to manually create an API token by
+logging in, navigating to your user profile and selecting "API Tokens"
+(:numref:`fig_generate_api_token_web`).
+
+.. note::
+
+    An API token is only ever valid for one DCOR instance. If you selected
+    the "Playground" option in DCOR-Aid, you are logged in at
+    https://dcor-dev.mpl.mpg.de. The main DCOR instance, however, is
+    located at https://dcor.mpl.mpg.de.
+
+.. _fig_generate_api_token_web:
+
+.. figure:: figures/generate_api_token_web.png
+
+    Generating an API token via the web interface.
+
+
 .. _sec_faq_upload_license:
 
 Why do I have to specify a creative commons license when uploading data?
