@@ -7,6 +7,7 @@ Using DCOR
    :caption: Guides:
 
    access
+   download
    upload
    share
    cite
