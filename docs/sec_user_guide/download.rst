@@ -33,7 +33,7 @@ as follows (exemplary dataset ID ``400ae3d4-9f8a-44f8-887d-1e4f6150deee``):
     from dcoraid.api import CKANAPI
     from dcoraid.download.queue import DownloadQueue
 
-    download_path = r"/tmp/"
+    download_path = r"D:\\Data"
 
     api = CKANAPI("https://dcor.mpl.mpg.de")
 
