@@ -11,7 +11,9 @@ the data, you have multiple options.
 Downloading with the DCOR-Aid GUI
 =================================
 This easiest way to download data from DCOR is via the DCOR-Aid user
-interface. You can choose between downloading public data (no user
+interface (`download installers here <https://github.com/DCOR-dev/DCOR-Aid/releases/latest>`_
+or install with ``pip install dcoraid[GUI]`` and execute ``dcoraid``).
+You can choose between downloading public data (no user
 account required) or private data (uploaded by your user account or shared
 with your user account). DCOR-Aid automatically verifies downloads
 with SHA256 checksums.
