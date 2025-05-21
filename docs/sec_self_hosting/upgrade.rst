@@ -54,8 +54,8 @@ steps to upgrade CKAN from the `CKAN docs
 
    Install the latest version of CKAN for your system::
 
-     CKANMINOR=2.10
-     CKANPATCH=2.10.4
+     CKANMINOR=2.11
+     CKANPATCH=2.11.3
      UBUNTURELEASE=$(lsb_release -cs)
      DLNAMESERVR=python-ckan_${CKANMINOR}-${UBUNTURELEASE}_amd64.deb
      DLNAMELOCAL=python-ckan_${CKANPATCH}-${UBUNTURELEASE}_amd64.deb
@@ -71,15 +71,15 @@ steps to upgrade CKAN from the `CKAN docs
      source /usr/lib/ckan/default/bin/activate
      export CKAN_INI=/etc/ckan/default/ckan.ini
 
-8. For the upgrade from CKAN 2.0 to 2.10, Solr must be installed (previous versions of Solr were
+8. For the upgrade from CKAN 2.9 to 2.10, Solr must be installed (previous versions of Solr were
    installed via ``apt``)::
 
      apt purge tomcat9 solr-tomcat
 
    Then, install solr manually as described in (installing ``openjdk-8-jdk-headless``
    is sufficient, you don't have to install ``openjdk-8-jdk``).
-   https://docs.ckan.org/en/2.10/maintaining/installing/solr.html?highlight=solr#installing-solr-manually
-   (CKAN 2.10 only supports solr 8.x).
+   https://docs.ckan.org/en/2.11/maintaining/installing/solr.html?highlight=solr#installing-solr-manually
+   (CKAN 2.11 recommends solr 9.x).
    Note that solr by default listens to tcp6 (IPv6). Thus, any setting in the
    ckan.ini file that uses `127.0.0.1` will not work - use `localhost` instead.
    To test solr, make sure that the following URL returns JSON data:
@@ -88,12 +88,12 @@ steps to upgrade CKAN from the `CKAN docs
 9. Install DCOR (either via `pip` or as described in
    the :ref:`development section <sec_dev_install>`)::
 
-     # might be necessary if pip is still broken
-     wget https://gitlab.gwdg.de/pmuelle3/ckan-release-mirror/-/raw/main/get-pip.py?inline=false -O CKAN_updates/get-pip.py
+     # This might be necessary if pip is still broken:
+     #  wget https://gitlab.gwdg.de/pmuelle3/ckan-release-mirror/-/raw/main/get-pip.py?inline=false -O CKAN_updates/get-pip.py
      # Make sure there is no conflict between setuptools and distutils
      # (https://github.com/pypa/setuptools/issues/2993#issuecomment-1003765389)
-     export SETUPTOOLS_USE_DISTUTILS=stdlib
-     python CKAN_updates/get-pip.py
+     #  export SETUPTOOLS_USE_DISTUTILS=stdlib
+     #  python CKAN_updates/get-pip.py
      pip install --upgrade pip wheel
      pip install --upgrade --force-reinstall dcor_control
 
