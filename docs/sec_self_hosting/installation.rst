@@ -73,10 +73,9 @@ please create this directory with
 Scratch Space
 =============
 It is important that you have some scratch space of at least 100 GB available
-on you system, so that the `ckanext-dc_serve` extension can create temporary
-condensed datasets before uploading them to S3. By default, the cache is
-located at `/data/tmp/ckanext-dc_serve` and is editable via the configuration
-option `ckanext.dc_serve.tmp_dir`.
+on you system, so that DCOR extensions can create temporary files.
+By default, the cache is located at `/cache`. The relevant configuration
+options are `ckanext.dc_serve.tmp_dir` and `ckanext.dcor_depot.tmp_dir`.
 
 
 Object Storage
@@ -99,7 +98,7 @@ actually exists. You can add a system user via::
 
     useradd -r minio-user
 
-Then, create a file ``/etc/defaul/minio`` with the following content::
+Then, create a file ``/etc/default/minio`` with the following content::
 
     # Volume to be used for MinIO server (make sure minio-user has access).
     MINIO_VOLUMES="/srv/minio"
@@ -191,12 +190,16 @@ Testing
 -------
 If you are setting up a development instance, then you might want to be able
 to run the DCOR tests. This step is not required if you are setting up an
-instance for production.
+instance for production. The following command will install the latest DCOR
+CKAN extensions in editable mode. After installing the packages
+from the ``tests/requirements.txt`` files, you can use pytest to test
+the extensions.
 
-For testing purposes, you can use the `DCOR vagrant box
-<https://app.vagrantup.com/paulmueller/boxes/dcor-test>`_. It contains
-a full install of DCOR (including SOLR and object storage) and is updated
-regularly.
+.. code::
+
+   source /usr/lib/ckan/default/bin/activate
+   dcor develop
+
 
 SSL
 ===
