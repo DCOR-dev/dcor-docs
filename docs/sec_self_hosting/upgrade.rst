@@ -78,7 +78,7 @@ steps to upgrade CKAN from the `CKAN docs
 
    Then, install solr manually as described in (installing ``openjdk-11-jdk-headless``
    is sufficient, you don't have to install ``openjdk-11-jdk``).
-   https://docs.ckan.org/en/2.11/maintaining/installing/solr.html?highlight=solr#installing-solr-manually
+   https://docs.ckan.org/en/latest/maintaining/installing/solr.html?highlight=solr#installing-solr-manually
    (CKAN 2.11 recommends solr 9.x).
    Note that solr by default listens to tcp6 (IPv6). Thus, any setting in the
    ckan.ini file that uses `127.0.0.1` will not work - use `localhost` instead.

@@ -75,7 +75,7 @@ Access via DCOR-Aid Python library
 The DCOR-Aid Python library provides you with a convenient interface
 to the API. In principle, you are not limited to Python or DCOR-Aid,
 as DCOR is basically `CKAN <https://ckan.readthedocs.io/>`_ and thus
-uses the `same API <https://docs.ckan.org/en/2.9/api/index.html>`_.
+uses the `same API <https://docs.ckan.org/en/latest/api/index.html>`_.
 
 To initiate a connection with DCOR, run:
 
@@ -93,7 +93,7 @@ to access private data. You can omit ``api_key`` if you are only interested
 in public data (or if you don't have an account).
 
 The ``dcoraid.CKANAPI`` class gives you full access to the `underlying
-API <https://docs.ckan.org/en/2.9/api/index.html>`_. For instance, you could
+API <https://docs.ckan.org/en/latest/api/index.html>`_. For instance, you could
 list all details of
 `this dataset <https://dcor-dev.mpl.mpg.de/dataset/figshare-7771184-v2>`_ with:
 

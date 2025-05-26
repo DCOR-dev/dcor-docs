@@ -46,7 +46,7 @@ Install CKAN:
    setup/fix that for you.
 
 Follow the remainder of the installation guide at 
-https://docs.ckan.org/en/2.9/maintaining/installing/install-from-package.html#install-and-configure-postgresql.
+https://docs.ckan.org/en/latest/maintaining/installing/install-from-package.html#install-and-configure-postgresql.
 Make sure to note down the PostgreSQL password which you will need in the
 initialization step.
 
