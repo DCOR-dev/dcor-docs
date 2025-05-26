@@ -1,15 +1,18 @@
-============
-Installation
-============
+.. _selfhost_install_manual:
 
-This section describes how to setup your own DCOR instance.
+===================
+Manual Installation
+===================
 
+These instructions walk you through a manual installation of DCOR from scratch.
+As this process is rather tedious and time-consuming, it should only be used
+as a reference guide for the :ref:`ansible-based installation <selfhost_install_ansible>`.
 
 .. _selfhost_ubuntuckan:
 
 Ubuntu and CKAN
 ===============
-Please use an `Ubuntu 20.04 <https://ubuntu.com/download/server>`_
+Please use an `Ubuntu 24.04 <https://ubuntu.com/download/server>`_
 installation for any development or production usage. This makes it
 easier to give support and track down issues.
 

@@ -8,7 +8,8 @@ Self-Hosting
    :maxdepth: 3
    :caption: Contents:
 
-   installation
+   installation_ansible
+   installation_manual
    operations
    upgrade
    troubleshooting
