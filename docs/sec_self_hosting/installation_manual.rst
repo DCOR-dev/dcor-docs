@@ -77,8 +77,8 @@ Scratch Space
 =============
 It is important that you have some scratch space of at least 100 GB available
 on you system, so that DCOR extensions can create temporary files.
-By default, the cache is located at `/cache`. The relevant configuration
-options are `ckanext.dc_serve.tmp_dir` and `ckanext.dcor_depot.tmp_dir`.
+By default, the cache is located at ``/cache``. The relevant configuration
+options are ``ckanext.dc_serve.tmp_dir`` and ``ckanext.dcor_depot.tmp_dir``.
 
 
 Object Storage
@@ -108,7 +108,7 @@ Then, create a file ``/etc/default/minio`` with the following content::
     # Use if you want to run MinIO on a custom port (console is the web interface).
     MINIO_OPTS="--address :9000 --console-address :9001"
     # Root user for the server.
-    MINIO_ROOT_USER=minio-root-user-account-name
+    MINIO_ROOT_USER=minioadmin
     # Root secret for the server.
     MINIO_ROOT_PASSWORD=secret-password-for-minio-root-user
     # set this for MinIO to reload entries with 'mc admin service restart'
@@ -164,10 +164,10 @@ Background workers
 ------------------
 DCOR comes with three job queues `dcor-short`, `dcor-normal`, and `dcor-long`
 for data processing after a resource is added to a dataset. The CKAN instance
-populates those queues and CKAN workers (e.g. via `ckan jobs worker dcor-short`)
-fetching and running the jobs in the background. The workers are run, like
-ckan itself, via `supervisor` and are defined via individual configuration
-files in `/etc/supervisor/conf.d`. When you run `dcor inspect` (see next
+populates those queues and CKAN workers (list jobs e.g. via ``ckan jobs worker dcor-short``)
+fetching and running the jobs in the background. The workers are ran, like
+ckan itself, via `Supervisord <https://supervisord.org/>`_ and are defined via individual configuration
+files in ``/etc/supervisor/conf.d``. When you run `dcor inspect` (see next
 section), these files will be created with your approval.
 
 
@@ -202,6 +202,8 @@ the extensions.
 
    source /usr/lib/ckan/default/bin/activate
    dcor develop
+   find /dcor-repos -name requirements.txt -exec pip install -r {} \;
+   pytest --sw /dcor-repos
 
 
 SSL
