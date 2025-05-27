@@ -322,7 +322,9 @@ Supervisor
 Sometimes the ckan-uwsgi start job might take a little longer and the default
 (1s) is not long enough so supervisor becomes impatient. Edit the file
 ``/etc/supervisor/conf.d/ckan-uwsgi.conf`` and add ``startsecs=60``.
-
+Also, since we are using ``die-on-term`` in the UWSGI configuration,
+make sure to remove ``stopsignal=QUIT`` in the supervisor configuration
+files for ``ckan`` and ``datapusher``.
 
 Systemd
 =======
