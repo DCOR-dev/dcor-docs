@@ -10,6 +10,6 @@ Self-Hosting
 
    installation_ansible
    installation_manual
+   upgrade_manual
    operations
-   upgrade
    troubleshooting

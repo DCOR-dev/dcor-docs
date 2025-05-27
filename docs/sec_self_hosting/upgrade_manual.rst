@@ -1,6 +1,12 @@
-==============
-Upgrading DCOR
-==============
+=======================
+Manually upgrading DCOR
+=======================
+
+Note that it is recommended to use the Ansible playbooks instead.
+Upgrading with ansible only means incrementing the CKAN version numbers
+and file hashes.
+
+The following instructions describe the upgrade process for a manual installation.
 
 DCOR only
 =========
