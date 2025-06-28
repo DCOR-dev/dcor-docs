@@ -4,7 +4,7 @@ Introduction
 
 Background
 ==========
-RT-DC is a microfluidics-based imaging technique that provides a
+DC is a microfluidics-based imaging technique that provides a
 high-throughput, high-dimensional, single-cell analysis. Measurement
 rates reach 1000 cells per second. An image is recorded for each cell,
 enabling cell charactererization based on its phenotype. Due to the
@@ -13,11 +13,11 @@ which makes it possible to infer mechanical properties. In addition,
 fluorescence information can be recorded, allowing a direct comparison
 to flow cytometry measurements.
 
-Since RT-DC measurements are comparatively large (hundreds of MB to several GB),
+Since DC measurements are comparatively large (hundreds of MB to several GB),
 the handling and/or backup of these data can become a problem, especially
 for small research and diagnostics labs. The deformability cytometry open
 repository (DCOR) offers a solution to this problem. Users can upload their
-RT-DC data, create collections, share with other users, and cite their data
+DC data, create collections, share with other users, and cite their data
 in scientific publications. Furthermore, DCOR is designed to integrate with the
 open-source analysis software `Shape-Out <https://shapeout2.readthedocs.io>`_;
 with DCOR, data analysis only requires a network connection, the actual data
@@ -42,11 +42,11 @@ Technology
 ==========
 DCOR is based on `CKAN <https://docs.ckan.org/>`_, an online data managing
 and publishing system. We provide a set of extensions and tools designed to
-make the work with RT-DC data easier. For instance, this includes a RESTful
-service that allows Shape-Out to directly access RT-DC resources without
+make the work with DC data easier. For instance, this includes a RESTful
+service that allows Shape-Out to directly access DC resources without
 downloading entire measurements
 (`ckanext-dc_serve <https://github.com/DCOR-dev/ckanext-dc_serve>`_) or
-previews of RT-DC data on CKAN web interface
+previews of DC data on CKAN web interface
 (`ckanext-dc_view <https://github.com/DCOR-dev/ckanext-dc_view>`_).
 You can find all extensions and tools at the
 `DCOR-dev GitHub organization <https://github.com/DCOR-dev>`_.

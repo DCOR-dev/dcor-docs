@@ -58,7 +58,7 @@ importing these publicly available datasets from figshare:
 
 .. code::
 
-   ckan import-figshare
+   ckan dcor-import-figshare
 
 
 robots.txt

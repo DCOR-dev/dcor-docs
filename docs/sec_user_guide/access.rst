@@ -114,7 +114,7 @@ list all details of
   Beware of the `dataset ambiguity`: On DCOR, a dataset (or package)
   contains a number of resources. You would call one of those resources
   a dataset in dclab. In other words, on DCOR a dataset consists of multiple
-  RT-DC files while with :func:`dclab.new_dataset` you always ever only open
+  DC files while with :func:`dclab.new_dataset` you always ever only open
   one resource.
 
 Another very useful tool in DCOR-Aid is the ``APIInterrogator`` class
@@ -135,11 +135,11 @@ searching for datasets:
 
 
 
-Example: List all RT-DC resources for a DCOR circle
----------------------------------------------------
-Let's say you are interested in all RT-DC data files in a DCOR circle,
+Example: List all DC resources for a DCOR circle
+------------------------------------------------
+Let's say you are interested in all DC data files in a DCOR circle,
 because you would like to run an automated analysis with dclab.
-The following script creates a list of IDs ``resource_ids`` with all RT-DC
+The following script creates a list of IDs ``resource_ids`` with all DC
 files in the
 `Figshare mirror <https://dcor.mpl.mpg.de/organization/figshare-import>`_
 circle and plots one of the resources. For more information on how to
@@ -165,7 +165,7 @@ access DCOR data with dclab, please refer to the
   for ds_dict in datasets:
       # iterate over all resources of a dataset
       for res_dict in ds_dict["resources"]:
-          # identify RT-DC data
+          # identify DC data
           if res_dict["mimetype"] == "RT-DC":
               resource_ids.append(res_dict["id"])
 
@@ -219,7 +219,7 @@ In this example, we order all resources according to flow rate
   for ds_dict in datasets:
       # iterate over all resources of a dataset
       for res_dict in ds_dict["resources"]:
-          # identify RT-DC data
+          # identify DC data
           if res_dict["mimetype"] == "RT-DC":
               flow_rate = res_dict.get("dc:setup:flow rate", np.nan)
               for fr in flow_rate_ids:

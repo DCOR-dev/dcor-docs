@@ -203,7 +203,7 @@ the extensions.
    source /usr/lib/ckan/default/bin/activate
    dcor develop
    find /dcor-repos -name requirements.txt -exec pip install -r {} \;
-   pytest --sw /dcor-repos
+   find /dcor-repos -name tests -exec pytest {} \;
 
 
 SSL

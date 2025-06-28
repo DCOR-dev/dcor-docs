@@ -134,7 +134,7 @@ def generate_task_file(path):
                             resource_dicts=resource_dicts)
         print(" - Done!")
     else:
-        print("\n...No usable RT-DC files!")
+        print("\n...No usable DC files!")
 
 
 def get_supplementary_resource_metadata(path):

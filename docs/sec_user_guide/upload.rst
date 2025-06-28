@@ -8,7 +8,7 @@ Uploading data to DCOR
 
 Prerequisites
 =============
-- DCKit: graphical toolkit for the management of RT-DC data
+- DCKit: graphical toolkit for the management of DC data
   (https://github.com/DC-analysis/DCKit/releases)
 - DCOR-Aid: GUI for managing data on DCOR
   (https://github.com/DCOR-dev/DCOR-Aid/releases)
