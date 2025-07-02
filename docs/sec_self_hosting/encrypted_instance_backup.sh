@@ -9,8 +9,8 @@
 # following cron job:
 #
 # # create encrypted database backups every day
-# 2 0 * * * root /root/scripts/encrypted_database_backup.sh > /dev/null
+# 2 0 * * * root /root/scripts/encrypted_instance_backup.sh > /dev/null
 #
 source /usr/lib/ckan/default/bin/activate
 export CKAN_INI=/etc/ckan/default/ckan.ini
-dcor encrypted-database-backup --key-id 8FD98B2183B2C228
+dcor encrypted-instance-backup --key-id 8FD98B2183B2C228

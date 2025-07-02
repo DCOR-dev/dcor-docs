@@ -58,5 +58,5 @@ The CKAN database may contain sensitive information, such as email
 addresses, which means that any backup should be encrypted. The
 following script should be self-explanatory:
 
-.. literalinclude:: encrypted_database_backup.sh
+.. literalinclude:: encrypted_instance_backup.sh
    :language: bash
