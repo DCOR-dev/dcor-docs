@@ -35,7 +35,7 @@ https://dcor.mpl.mpg.de. However, you might want to consider using
 DCOR-Aid instead, because:
 
 - You can more easily browse circles and collection in the DCOR-Aid GUI.
-- You can drag and drop resources from DCOR-Aid into Shape-Out
+- You can drag and drop resources from DCOR-Aid into DCscope
   (no need to copy and paste resource IDs).
 - DCOR-Aid comes with a resource download manager.
 

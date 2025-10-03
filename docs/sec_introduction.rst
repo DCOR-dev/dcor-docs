@@ -19,7 +19,7 @@ for small research and diagnostics labs. The deformability cytometry open
 repository (DCOR) offers a solution to this problem. Users can upload their
 DC data, create collections, share with other users, and cite their data
 in scientific publications. Furthermore, DCOR is designed to integrate with the
-open-source analysis software `Shape-Out <https://shapeout2.readthedocs.io>`_;
+open-source analysis software `DCscope <https://dcscope.readthedocs.io>`_;
 with DCOR, data analysis only requires a network connection, the actual data
 remain on the server.
 
@@ -43,7 +43,7 @@ Technology
 DCOR is based on `CKAN <https://docs.ckan.org/>`_, an online data managing
 and publishing system. We provide a set of extensions and tools designed to
 make the work with DC data easier. For instance, this includes a RESTful
-service that allows Shape-Out to directly access DC resources without
+service that allows DCscope to directly access DC resources without
 downloading entire measurements
 (`ckanext-dc_serve <https://github.com/DCOR-dev/ckanext-dc_serve>`_) or
 previews of DC data on CKAN web interface

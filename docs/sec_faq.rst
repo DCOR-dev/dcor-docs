@@ -74,7 +74,7 @@ the background:
 
 - Generate a condensed version of the original data. This computationally
   expensive task is necessary to provide fast access to ancillary features,
-  such as volume or principal inertia ratio, to Shape-Out 2 or dclab via the
+  such as volume or principal inertia ratio, to DCscope or dclab via the
   DCOR API. It also allows you to only upload the data you actually recorded
   (without any disadvantages).
 - Generate a preview image and extract the configuration for visualization

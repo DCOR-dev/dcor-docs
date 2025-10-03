@@ -73,5 +73,5 @@ intersphinx_mapping = {
     "skimage": ('http://scikit-image.org/docs/stable/', None),
     "scipy": ('https://docs.scipy.org/doc/scipy/reference/', None),
     "dclab": ('http://dclab.readthedocs.io/en/stable', None),
-    "shapeout2": ('http://shapeout2.readthedocs.io/en/stable', None),
+    "dcscope": ('http://dcscope.readthedocs.io/en/stable', None),
     }

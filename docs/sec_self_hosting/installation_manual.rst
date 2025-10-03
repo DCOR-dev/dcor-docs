@@ -256,7 +256,7 @@ First copy the certificate to ``/etc/ssl/private``::
 
 .. note::
 
-   If dclab, Shape-Out, or DCOR-Aid cannot connect to your CKAN instance,
+   If dclab, DCscope, or DCOR-Aid cannot connect to your CKAN instance,
    it might be because the certificate in ``/etc/ssl/certs/`` does not
    contain the full certificate chain. In this case, just download the
    entire certificate chain using Firefox (right-lick on the shield
