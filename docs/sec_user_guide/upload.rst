@@ -100,3 +100,67 @@ searches a directory tree for .rtdc files and generates .dcoraid-task files.
 .. literalinclude:: upload_task_generation.py
   :language: python
 
+
+.. _sec_upload_markdown_reference:
+
+Markdown Reference
+==================
+
+To write dataset descriptions, you can use Markdown.
+Markdown is a text highlighting language that is human-readable in its
+raw form. The following table lists a subset of its syntax. You can find
+more examples at https://www.markdownguide.org/cheat-sheet/.
+
+.. list-table::
+
+   * - **Command**
+     - **Markdown syntax**
+   * - **Headers**
+     - .. code-block:: none
+
+         # Heading 1
+         This is a top-level heading.
+
+         ## Heading 2
+         This is a subheading.
+
+         ### Heading 3
+         This is a sub-subheading.
+   * - **Bold**
+     - .. code-block:: none
+
+         **Bold text**
+   * - **Italic**
+     - .. code-block:: none
+
+         *Italic text*
+   * - **Bulletpoint lists**
+     - .. code-block:: none
+
+         - Item A
+         - Item B
+           This is a detailed description of item B.
+   * - **Ordered lists**
+     - .. code-block:: none
+
+         1. Item 1
+            This is a detailed description of item 1.
+         2. Item 2
+            This is a detailed description of item 2.
+   * - **Links**
+     - .. code-block:: none
+
+         [Link text](http://www.example.com)
+   * - **Inline Code**
+     - .. code-block:: none
+
+         Initially, we set `variable = 3`.
+   * - **Code Block**
+     - .. code-block:: none
+
+         ```python
+         def greet(name):
+             print("Hello, " + name + "!")
+
+         greet("John")
+         ```
