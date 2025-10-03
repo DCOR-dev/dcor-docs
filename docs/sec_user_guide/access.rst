@@ -126,8 +126,8 @@ searching for datasets:
   # instantiate APIInterrogator
   air = dcoraid.APIInterrogator(api)
   # search for a dataset in a DCOR circle
-  dbe = air.search_dataset(query="reference data",
-                           circles=["figshare-import"])
+  dbe = air.search_dataset_via_api(query="reference data",
+                                   circles=["figshare-import"])
   # the returned database extract (one hit)...
   len(dbe)
   # ...contains all metadata of the datasets matching the search query
@@ -159,7 +159,7 @@ access DCOR data with dclab, please refer to the
   api = dcoraid.CKANAPI("dcor.mpl.mpg.de")
   air = dcoraid.APIInterrogator(api)
   # get a list of all datasets for `circle_name`
-  datasets = air.search_dataset(circles=[circle_name], limit=0)
+  datasets = air.search_dataset_via_api(circles=[circle_name], limit=0)
   # iterate over all datasets and populate our resources list
   resource_ids = []
   for ds_dict in datasets:
@@ -214,7 +214,7 @@ In this example, we order all resources according to flow rate
   api = dcoraid.CKANAPI("dcor.mpl.mpg.de")
   air = dcoraid.APIInterrogator(api)
   # get a list of all datasets for `circle_name`
-  datasets = air.search_dataset(circles=[circle_name], limit=0)
+  datasets = air.search_dataset_via_api(circles=[circle_name], limit=0)
   # iterate over all datasets
   for ds_dict in datasets:
       # iterate over all resources of a dataset
